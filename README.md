@@ -1,7 +1,6 @@
 
 # Vicio's Burger — Menú para delivery
 
-Una demo ligera y móvil para mostrar productos y confirmar pedidos por WhatsApp.
 [![Vite](https://img.shields.io/badge/Vite-3.0-FFD166?logo=vite&logoColor=ffffff)](https://vitejs.dev) [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=ffffff)](https://reactjs.org)
 
 Una demo ligera y móvil para mostrar productos y confirmar pedidos por WhatsApp. 🍔📱
