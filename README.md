@@ -1,16 +1,35 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Vicio's Burger — Menú para delivery
 
-Currently, two official plugins are available:
+Una demo ligera y móvil para mostrar productos y confirmar pedidos por WhatsApp.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Por qué es especial
+- Diseño pensado para móvil: cards horizontales con snap, aspecto tipo app de delivery.
+- Cards compactas 3:4, fotos destacadas y badges de ingredientes.
+- Carrito optimizado, opción Envío/Retiro y generación automática de mensaje para WhatsApp.
 
-## React Compiler
+Estado y contenido
+- Código principal: `src/App.jsx` (UI, carrito, lógica de pedido).
+- Estilos: Tailwind en `src/index.css` + reglas extra en `src/App.css`.
+- Imágenes: `src/assets/img/` — puedes reemplazarlas por tus fotos.
+- Fuentes: `Inter` para el cuerpo y `Montserrat` para títulos.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Cómo ejecutar (desarrollo)
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+Flujo de uso
+1. Abrir la app en el móvil o emulador.
+2. Ir a "Menú" — explorar Burgas y Papas.
+3. Tocar "AÑADIR" para sumar al carrito.
+4. En carrito elegir Retiro/Envío y confirmar por WhatsApp.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Administración rápida (idea)
+Si quieres que el local pueda cerrarse/abrirse desde el celular, puedo añadir un panel admin mínimo con Firebase o Supabase que guarde el estado `closed` y `openingTime` — la app escucharía en tiempo real y mostraría un overlay "cerrado".
+
+Contacto
+- Creado por: poncefrancomiguel@gmail.com
+
+Si quieres, implemento ahora el panel admin PoC (Firebase/Firestore).
