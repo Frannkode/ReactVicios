@@ -90,10 +90,13 @@ const PRODUCTOS = [
     categoria: "Fritas",
     nombre: "Papafritas",
     descripcion: "Papas fritas",
-    precio: null,
+    precio: 3500,
     imagen: papasImg
   }
 ];
+
+// Categorías mostradas en el menú (para deshabilitar secciones, quitar de esta lista)
+const VISIBLE_CATEGORIES = ['Hamburguesas', 'Fritas'];
 
 const Popup = ({ mensaje, tipo, visible }) => (
   <div className={`fixed top-10 left-1/2 -translate-x-1/2 z-[100] transition-all duration-300 transform ${visible ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0 pointer-events-none'}`}>
@@ -202,8 +205,8 @@ export default function App() {
       {/* HEADER */}
       <header className="fixed top-0 left-0 w-full z-40 bg-zinc-950/80 backdrop-blur-md border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center">
         <div className="flex items-center gap-2 cursor-pointer transition-transform active:scale-95" onClick={() => setView('home')}>
-          <span className="text-2xl md:text-3xl font-black text-white tracking-tighter font-['Rubik',_sans-serif]">VICIO'S</span>
-          <span className="text-2xl md:text-3xl font-black text-yellow-500 tracking-tighter font-['Rubik',_sans-serif]">BURGER</span>
+          <span className="text-2xl md:text-3xl font-black text-white tracking-tighter font-['Montserrat',_sans-serif]">VICIO'S</span>
+          <span className="text-2xl md:text-3xl font-black text-yellow-500 tracking-tighter font-['Montserrat',_sans-serif]">BURGER</span>
         </div>
         
         <div className="hidden md:flex gap-8 text-xl uppercase tracking-widest text-zinc-400">
@@ -223,7 +226,7 @@ export default function App() {
           <div className="min-h-[70vh] flex flex-col items-center justify-center py-12">
             <div className="grid md:grid-cols-2 gap-12 items-center w-full">
               <div className="text-center md:text-left">
-                <h1 className="text-6xl md:text-8xl lg:text-9xl font-black leading-none mb-6 drop-shadow-[0_10px_20px_rgba(234,179,8,0.4)] uppercase italic font-['Rubik',_sans-serif]">
+                <h1 className="text-6xl md:text-8xl lg:text-9xl font-black leading-none mb-6 drop-shadow-[0_10px_20px_rgba(234,179,8,0.4)] uppercase italic font-['Montserrat',_sans-serif]">
                   Sabor <br /> <span className="text-yellow-500 tracking-tight">Extremo</span>
                 </h1>
                 <p className="text-lg md:text-xl text-zinc-400 mb-10 max-w-md mx-auto md:mx-0 font-sans italic leading-relaxed">
@@ -253,15 +256,17 @@ export default function App() {
 
         {view === 'menu' && (
           <div>
-            <h1 className="text-5xl md:text-7xl text-center mb-16 uppercase tracking-tighter font-['Rubik',_sans-serif]">Nuestra <span className="text-red-500 italic">Carta</span></h1>
+            <h1 className="text-5xl md:text-7xl text-center mb-16 uppercase tracking-tighter font-['Montserrat',_sans-serif]">Nuestra <span className="text-red-500 italic">Carta</span></h1>
             
-            {['Hamburguesas', 'Sandwiches', 'Pizzas', 'Fritas'].map(cat => (
+            {VISIBLE_CATEGORIES.map(cat => {
+              const displayCat = cat === 'Hamburguesas' ? 'Burgas' : cat === 'Fritas' ? 'Papas' : cat;
+              return (
               <section key={cat} className="mb-24">
                 <div className="flex items-center gap-4 mb-10 border-b border-zinc-900 pb-4">
                   <span className="text-4xl">{cat === 'Hamburguesas' ? '🍔' : cat === 'Sandwiches' ? '🥪' : '🍟'}</span>
-                  <h2 className="text-4xl md:text-5xl uppercase tracking-tighter text-yellow-500">{cat}</h2>
+                    <h2 className="text-4xl md:text-5xl tracking-tighter text-yellow-500 font-extrabold">{displayCat}</h2>
                 </div>
-                
+
                 <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 py-4 no-scrollbar">
                   {PRODUCTOS.filter(p => p.categoria === cat).map(prod => {
                     const cant = carrito.find(i => i.id === prod.id)?.cantidad || 0;
@@ -290,7 +295,7 @@ export default function App() {
                         </div>
 
                         <div className="p-4 flex flex-col flex-grow text-center sm:text-left">
-                          <h3 className="text-xl mb-1 uppercase tracking-tight leading-tight min-h-[2rem] flex items-center justify-center sm:justify-start">
+                            <h3 className="text-xl mb-1 uppercase tracking-tight leading-tight min-h-[2rem] flex items-center justify-center sm:justify-start font-extrabold">
                             {prod.nombre}
                           </h3>
                           <div className="flex flex-wrap gap-1 justify-center sm:justify-start mb-3 max-h-[2.6rem] overflow-hidden items-center">
@@ -332,7 +337,8 @@ export default function App() {
                   })}
                 </div>
               </section>
-            ))}
+            );
+          })}
           </div>
         )}
 
