@@ -2,11 +2,17 @@
 # Vicio's Burger — Menú para delivery
 
 Una demo ligera y móvil para mostrar productos y confirmar pedidos por WhatsApp.
+[![Vite](https://img.shields.io/badge/Vite-3.0-FFD166?logo=vite&logoColor=ffffff)](https://vitejs.dev) [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=ffffff)](https://reactjs.org)
+
+Una demo ligera y móvil para mostrar productos y confirmar pedidos por WhatsApp. 🍔📱
 
 Por qué es especial
 - Diseño pensado para móvil: cards horizontales con snap, aspecto tipo app de delivery.
 - Cards compactas 3:4, fotos destacadas y badges de ingredientes.
 - Carrito optimizado, opción Envío/Retiro y generación automática de mensaje para WhatsApp.
+- 📱 Diseño pensado para móvil: cards horizontales con snap, aspecto tipo app de delivery.
+- 🍔 Cards compactas 3:4, fotos destacadas y badges de ingredientes.
+- 🛒 Carrito optimizado, opción Envío/Retiro y generación automática de mensaje para WhatsApp.
 
 Estado y contenido
 - Código principal: `src/App.jsx` (UI, carrito, lógica de pedido).
@@ -31,5 +37,3 @@ Si quieres que el local pueda cerrarse/abrirse desde el celular, puedo añadir u
 
 Contacto
 - Creado por: poncefrancomiguel@gmail.com
-
-Si quieres, implemento ahora el panel admin PoC (Firebase/Firestore).
