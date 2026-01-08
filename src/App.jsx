@@ -3,6 +3,7 @@ import { ShoppingCart, Home, List, Plus, Minus, X, Instagram, Facebook } from 'l
 import viciosEspecialImg from './assets/img/viciosespecial.jpg';
 import megaViciosImg from './assets/img/megavicios.jpg';
 import decampoImg from './assets/img/decampo.jpg';
+import viciosComunImg from './assets/img/vicioscomun.jpg';
 import sandwicheImg from './assets/img/sandwiche.jpg';
 import superViciosImg from './assets/img/supervicios.jpg';
 import papasImg from './assets/img/papas.jpg';
@@ -26,7 +27,7 @@ const PRODUCTOS = [
     nombre: "Vicio's Comun",
     descripcion: "Pan de papa, doble carne, doble cheddar, panceta, mayonesa",
     precio: 6600,
-    imagen: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=500&auto=format&fit=crop"
+    imagen: viciosComunImg
   },
   {
     id: 3,
