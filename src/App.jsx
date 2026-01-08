@@ -7,6 +7,7 @@ import viciosComunImg from './assets/img/vicioscomun.jpg';
 import sandwicheImg from './assets/img/sandwiche.jpg';
 import superViciosImg from './assets/img/supervicios.jpg';
 import papasImg from './assets/img/papas.jpg';
+import papasGrandesImg from './assets/img/papasgrandes.jpg';
 import crispyImg from './assets/img/crispy.jpg';
 
 /**
@@ -93,6 +94,14 @@ const PRODUCTOS = [
     descripcion: "Papas fritas",
     precio: 3500,
     imagen: papasImg
+  },
+  {
+    id: 11,
+    categoria: "Fritas",
+    nombre: "Papas Grandes",
+    descripcion: "Papas fritas grandes, crujientes",
+    precio: 6000,
+    imagen: papasGrandesImg
   }
 ];
 
