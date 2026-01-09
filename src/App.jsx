@@ -183,8 +183,11 @@ export default function App() {
     triggerPopup('Producto eliminado', 'error');
   };
 
-  const totalCarrito = carrito.reduce((acc, item) => acc + ((item.precio || 0) * item.cantidad), 0);
+  const subtotal = carrito.reduce((acc, item) => acc + ((item.precio || 0) * item.cantidad), 0);
   const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+  const SHIPPING = 600;
+  const totalCarrito = subtotal;
+  const finalTotal = subtotal + (delivery ? SHIPPING : 0);
 
   const enviarWhatsapp = () => {
     if (carrito.length === 0) return;
@@ -199,11 +202,11 @@ export default function App() {
     });
     mensaje += `\n`;
     if (delivery) {
-      mensaje += `🚚 Envío: Sí\n📍 Dirección: ${address}\n`;
+      mensaje += `🚚 Envío: Sí - $${SHIPPING}\n📍 Dirección: ${address}\n`;
     } else {
       mensaje += `🚚 Envío: No (Retiro)\n`;
     }
-    mensaje += `\n💰 *Total: $${totalCarrito}*`;
+    mensaje += `\n💰 *Total: $${finalTotal}*`;
     const url = `https://wa.me/543482535194?text=${encodeURIComponent(mensaje)}`;
     window.open(url, '_blank');
   };
@@ -408,9 +411,21 @@ export default function App() {
                       </div>
                     )}
                   </div>
-                  <div className="flex justify-between items-center mb-4 border-b border-zinc-800 pb-4 relative z-10">
-                    <span className="text-lg text-zinc-400 uppercase tracking-widest">A PAGAR:</span>
-                    <span className="text-3xl md:text-4xl text-green-500 font-black tracking-tighter">${totalCarrito}</span>
+                  <div className="flex flex-col gap-2 mb-4 border-b border-zinc-800 pb-4 relative z-10">
+                    <div className="flex justify-between items-center">
+                      <span className="text-lg text-zinc-400 uppercase tracking-widest">Subtotal:</span>
+                      <span className="text-lg text-zinc-400">${totalCarrito}</span>
+                    </div>
+                    {delivery && (
+                      <div className="flex justify-between items-center">
+                        <span className="text-lg text-zinc-400 uppercase tracking-widest">Envío:</span>
+                        <span className="text-lg text-zinc-400">${SHIPPING}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between items-center">
+                      <span className="text-lg text-zinc-400 uppercase tracking-widest">A PAGAR:</span>
+                      <span className="text-3xl md:text-4xl text-green-500 font-black tracking-tighter">${finalTotal}</span>
+                    </div>
                   </div>
                   <button 
                     onClick={enviarWhatsapp}
