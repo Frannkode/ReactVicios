@@ -473,7 +473,7 @@ export default function App() {
       <footer className="py-6 text-center text-zinc-700 font-sans text-sm tracking-widest uppercase">
         <div>&copy; 2026 VICIO'S BURGER.</div>
         <div className="mt-2 text-xs normal-case tracking-normal">
-          Creado por <a href="mailto:poncefrancomiguel@gmail.com" className="text-yellow-500 underline">poncefrancomiguel@gmail.com</a>
+          Creado por <a href="mailto:poncefrancomiguel@gmail.com" className="text-yellow-500 underline">poncefrancomiguel@gmail.com!</a>
         </div>
       </footer>
     </div>
