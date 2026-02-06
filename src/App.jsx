@@ -207,7 +207,8 @@ export default function App() {
       mensaje += `🚚 Envío: No (Retiro)\n`;
     }
     mensaje += `\n💰 *Total: $${finalTotal}*`;
-    const url = `https://wa.me/543482535194?text=${encodeURIComponent(mensaje)}`;
+    const encodedMensaje = encodeURIComponent(mensaje);
+    const url = `https://api.whatsapp.com/send?phone=543482535194&text=${encodedMensaje}`;
     window.open(url, '_blank');
   };
 
