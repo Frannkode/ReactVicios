@@ -9,22 +9,13 @@ import superViciosImg from './assets/img/supervicios.jpg';
 import papasImg from './assets/img/papas.jpg';
 import papasGrandesImg from './assets/img/papasgrandes.jpg';
 import crispyImg from './assets/img/crispy.jpg';
-import sanvalentinImg from './assets/img/sanvalentin.jpeg';
+
 
 /**
  * DATOS DE PRODUCTOS
  */
 const PRODUCTOS = [
-  // === INICIO EDICIÓN SAN VALENTÍN (comentario para remover después de la fecha) ===
-  {
-    id: 100,
-    categoria: "Hamburguesas",
-    nombre: "💘 Edición San Valentín",
-    descripcion: "Pan rojo, mayonesa, doble carne, panceta, doble cheddar.",
-    precio: 7000,
-    imagen: sanvalentinImg
-  },
-  // === FIN EDICIÓN SAN VALENTÍN ===
+
   {
     id: 1,
     categoria: "Hamburguesas",
@@ -286,50 +277,6 @@ export default function App() {
         
         {view === 'home' && (
           <div className="min-h-[70vh] flex flex-col items-center justify-center py-12">
-            {/* === INICIO EDICIÓN SAN VALENTÍN === */}
-            {/* Temática especial San Valentín */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="absolute top-10 left-10 text-pink-500 opacity-30 animate-pulse">💖</div>
-              <div className="absolute top-20 right-20 text-red-500 opacity-40 animate-pulse delay-100">💕</div>
-              <div className="absolute bottom-32 left-1/4 text-pink-400 opacity-35 animate-pulse delay-200">💗</div>
-              <div className="absolute bottom-20 right-10 text-red-400 opacity-30 animate-pulse delay-300">💓</div>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-12 items-center w-full relative z-10">
-              <div className="text-center md:text-left">
-                <h1 className="text-6xl md:text-8xl lg:text-9xl font-black leading-none mb-6 drop-shadow-[0_10px_20px_rgba(234,179,8,0.4)] uppercase italic font-['Montserrat',_sans-serif]">
-                  Sabor <br /> <span className="text-pink-500 tracking-tight">Extremo</span> <span className="text-red-500">💘</span>
-                </h1>
-                <p className="text-lg md:text-xl text-zinc-400 mb-6 max-w-md mx-auto md:mx-0 font-sans italic leading-relaxed">
-                  Las burgers más icónicas. Ingredientes frescos y un vicio del que no querrás salir.
-                </p>
-                {/* Frase especial San Valentín */}
-                <p className="text-xl md:text-2xl text-pink-400 mb-8 max-w-md mx-auto md:mx-0 font-sans italic font-bold animate-pulse">
-                  💕 Amor a primera mordida 💕
-                </p>
-                <div className="flex flex-col sm:flex-row gap-5 justify-center md:justify-start">
-                  <button 
-                    onClick={() => setView('menu')}
-                    className="bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white px-10 py-5 rounded-2xl text-2xl font-black transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(236,72,153,0.3)] btn btn-cta"
-                  >
-                    VER LA CARTA 💘
-                  </button>
-                </div>
-              </div>
-              
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-red-500/20 blur-[100px] rounded-full" />
-                <img 
-                  src={sanvalentinImg}
-                  className="relative z-10 w-full rounded-[50px] shadow-2xl border-2 border-pink-500/30 rotate-1 hover:rotate-0 transition-transform duration-500"
-                  alt="Edición San Valentín"
-                />
-              </div>
-            </div>
-            {/* === FIN EDICIÓN SAN VALENTÍN === */}
-
-            {/* === CÓDIGO ORIGINAL (descomentar después de San Valentín) === */}
-            {/*
             <div className="grid md:grid-cols-2 gap-12 items-center w-full">
               <div className="text-center md:text-left">
                 <h1 className="text-6xl md:text-8xl lg:text-9xl font-black leading-none mb-6 drop-shadow-[0_10px_20px_rgba(234,179,8,0.4)] uppercase italic font-['Montserrat',_sans-serif]">
@@ -351,34 +298,27 @@ export default function App() {
               <div className="relative">
                 <div className="absolute inset-0 bg-yellow-500/10 blur-[100px] rounded-full" />
                 <img 
-                  src={PRODUCTOS[2].imagen} 
+                  src={PRODUCTOS[1].imagen} 
                   className="relative z-10 w-full rounded-[50px] shadow-2xl border-2 border-white/5 rotate-1 hover:rotate-0 transition-transform duration-500"
                   alt="Mega Burger"
                 />
               </div>
             </div>
-            */}
           </div>
         )}
 
         {view === 'menu' && (
           <div className="md:grid md:grid-cols-3 gap-8 items-start">
-            {/* === INICIO TEMÁTICA SAN VALENTÍN - MENÚ === */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="absolute top-20 left-10 text-pink-500 opacity-20 animate-pulse">💖</div>
-              <div className="absolute top-40 right-10 text-red-500 opacity-25 animate-pulse delay-150">💕</div>
-              <div className="absolute bottom-40 left-20 text-pink-400 opacity-20 animate-pulse delay-300">💗</div>
-            </div>
-            <div className="md:col-span-2 relative z-10">
-            <h1 className="text-5xl md:text-7xl text-center mb-16 uppercase tracking-tighter font-['Montserrat',_sans-serif]">Nuestra <span className="text-pink-500 italic">Carta</span> <span className="text-red-500">💘</span></h1>
+            <div className="md:col-span-2">
+            <h1 className="text-5xl md:text-7xl text-center mb-16 uppercase tracking-tighter font-['Montserrat',_sans-serif]">Nuestra <span className="text-yellow-500 italic">Carta</span></h1>
             
             {VISIBLE_CATEGORIES.map(cat => {
               const displayCat = cat === 'Hamburguesas' ? 'Burgas' : cat === 'Fritas' ? 'Papas' : cat;
               return (
               <section key={cat} className="mb-24">
-                <div className="flex items-center gap-4 mb-10 border-b border-pink-500/20 pb-4">
+                <div className="flex items-center gap-4 mb-10 border-b border-white/10 pb-4">
                   <span className="text-4xl">{cat === 'Hamburguesas' ? '🍔' : cat === 'Sandwiches' ? '🥪' : '🍟'}</span>
-                    <h2 className="text-4xl md:text-5xl tracking-tighter text-pink-500 font-extrabold">{displayCat}</h2>
+                    <h2 className="text-4xl md:text-5xl tracking-tighter text-yellow-500 font-extrabold">{displayCat}</h2>
                 </div>
 
                 <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 py-4 no-scrollbar">
@@ -402,7 +342,7 @@ export default function App() {
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent" />
                           <div className="absolute bottom-4 left-6">
-                                <span className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-3 py-0.5 rounded-lg text-sm font-bold shadow-md badge-pill">
+                                <span className="bg-yellow-500 text-black px-3 py-0.5 rounded-lg text-sm font-bold shadow-md badge-pill">
                                     {prod.precio ? `$${prod.precio}` : 'Próximamente'}
                                   </span>
                           </div>
@@ -424,14 +364,14 @@ export default function App() {
                           <div className="mt-auto flex gap-3 items-center">
                             <button 
                               onClick={(e) => { e.stopPropagation(); agregarAlCarrito(prod); }}
-                              className="flex-1 bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white py-2 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-95 font-bold text-sm btn btn-add"
+                              className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-black py-2 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-95 font-bold text-sm btn btn-add"
                             >
                               <Plus size={18} strokeWidth={3} /> AÑADIR
                             </button>
                             {cant > 0 && (
                               <button 
                                 onClick={(e) => { e.stopPropagation(); quitarDelCarrito(prod.id); }}
-                                className="bg-zinc-800 hover:bg-pink-600 text-white w-10 rounded-lg flex items-center justify-center transition-all active:scale-95 shadow-md"
+                                className="bg-zinc-800 hover:bg-red-600 text-white w-10 rounded-lg flex items-center justify-center transition-all active:scale-95 shadow-md"
                               >
                                 <Minus size={16} strokeWidth={3} />
                               </button>
@@ -460,33 +400,28 @@ export default function App() {
 
         {view === 'cart' && (
           <div className="max-w-2xl mx-auto px-2">
-            {/* === INICIO TEMÁTICA SAN VALENTÍN - CARRITO === */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <div className="absolute top-10 right-20 text-pink-500 opacity-20 animate-pulse">💕</div>
-              <div className="absolute bottom-20 left-10 text-red-500 opacity-20 animate-pulse delay-200">💓</div>
-            </div>
-            <h1 className="text-5xl md:text-7xl text-center mb-12 uppercase italic relative z-10">Tu <span className="text-pink-500 tracking-tighter">Bolsa</span> <span className="text-red-500">💘</span></h1>
+            <h1 className="text-5xl md:text-7xl text-center mb-12 uppercase italic">Tu <span className="text-yellow-500 tracking-tighter">Bolsa</span></h1>
             
             {carrito.length === 0 ? (
-              <div className="text-center py-16 bg-zinc-900/40 rounded-[30px] border-2 border-dashed border-pink-500/30 relative z-10">
-                <ShoppingCart size={64} className="mx-auto mb-4 text-pink-500" />
-                <p className="text-xl text-zinc-400 mb-6 uppercase">No hay nada por aquí... 💔</p>
+              <div className="text-center py-16 bg-zinc-900/40 rounded-[30px] border-2 border-dashed border-white/10">
+                <ShoppingCart size={64} className="mx-auto mb-4 text-zinc-600" />
+                <p className="text-xl text-zinc-400 mb-6 uppercase">Tu bolsa está vacía</p>
                 <button 
                   onClick={() => setView('menu')}
-                  className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-6 py-2 rounded-lg text-lg font-black uppercase transition-transform hover:scale-105 shadow-md"
+                  className="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-2 rounded-lg text-lg font-black uppercase transition-transform hover:scale-105 shadow-md"
                 >
-                  IR A COMER 💕
+                  IR A COMER
                 </button>
               </div>
             ) : (
-              <div className="space-y-5 relative z-10">
+              <div className="space-y-5">
                 {carrito.map(item => (
                   <div key={item.id} className="flex flex-col sm:flex-row gap-4 bg-zinc-900 p-3 rounded-[20px] items-center border border-white/5 shadow-lg">
                     <img src={item.imagen} className="w-20 h-20 object-cover rounded-lg shadow-md" />
                         <div className="flex-1 text-center sm:text-left">
                       <h3 className="text-lg leading-none uppercase tracking-tight mb-1">{item.nombre}</h3>
-                      <div className="flex items-center justify-center sm:justify-start gap-3">
-                        <p className="text-pink-500 text-xl font-extrabold">{item.precio ? `${item.precio}` : 'Próximamente'}</p>
+                        <div className="flex items-center justify-center sm:justify-start gap-3">
+                        <p className="text-yellow-500 text-xl font-extrabold">{item.precio ? `${item.precio}` : 'Próximamente'}</p>
                         <span className="text-zinc-600 text-lg font-sans font-bold">× {item.cantidad}</span>
                       </div>
                     </div>
@@ -506,12 +441,11 @@ export default function App() {
                   </div>
                 ))}
 
-                      <div className="mt-8 bg-zinc-900 p-6 rounded-[30px] border-2 border-pink-500/30 shadow-2xl overflow-hidden relative card-elevated">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-pink-500/10 blur-3xl rounded-full -mr-10 -mt-10" />
+                      <div className="mt-8 bg-zinc-900 p-6 rounded-[30px] border-2 border-white/5 shadow-2xl overflow-hidden relative card-elevated">
                   <div className="mb-4">
                     <div className="flex items-center justify-center gap-3 mb-2">
-                      <button onClick={() => setDelivery(false)} className={`px-3 py-1 rounded-full ${!delivery ? 'bg-gradient-to-r from-pink-500 to-red-500 text-white' : 'bg-zinc-800 text-zinc-300'}`}>Retiro 💕</button>
-                      <button onClick={() => setDelivery(true)} className={`px-3 py-1 rounded-full ${delivery ? 'bg-gradient-to-r from-pink-500 to-red-500 text-white' : 'bg-zinc-800 text-zinc-300'}`}>Envío 🚚</button>
+                      <button onClick={() => setDelivery(false)} className={`px-3 py-1 rounded-full ${!delivery ? 'bg-yellow-500 text-black font-bold' : 'bg-zinc-800 text-zinc-300'}`}>Retiro</button>
+                      <button onClick={() => setDelivery(true)} className={`px-3 py-1 rounded-full ${delivery ? 'bg-yellow-500 text-black font-bold' : 'bg-zinc-800 text-zinc-300'}`}>Envío 🚚</button>
                     </div>
                     {delivery && (
                       <div className="mb-3">
@@ -532,14 +466,14 @@ export default function App() {
                     )}
                     <div className="flex justify-between items-center">
                       <span className="text-lg text-zinc-400 uppercase tracking-widest">A PAGAR:</span>
-                      <span className="text-3xl md:text-4xl text-pink-500 font-black tracking-tighter">${finalTotal}</span>
+                      <span className="text-3xl md:text-4xl text-yellow-500 font-black tracking-tighter">${finalTotal}</span>
                     </div>
                   </div>
                   <button 
                     onClick={enviarWhatsapp}
-                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white py-3 rounded-[18px] text-lg flex items-center justify-center gap-3 shadow-md transition-all active:scale-95 font-black uppercase tracking-tight relative z-10 btn btn-cta"
+                    className="w-full bg-green-500 hover:bg-green-600 text-black py-3 rounded-[18px] text-lg flex items-center justify-center gap-3 shadow-md transition-all active:scale-95 font-black uppercase tracking-tight btn btn-cta"
                   >
-                    CONFIRMAR POR WHATSAPP 💘
+                    CONFIRMAR POR WHATSAPP
                   </button>
                 </div>
               </div>
