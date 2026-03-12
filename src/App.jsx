@@ -297,6 +297,9 @@ export default function App() {
           <div className="min-h-[70vh] flex flex-col items-center justify-center py-12">
             <div className="grid md:grid-cols-2 gap-12 items-center w-full">
               <div className="text-center md:text-left">
+                <div className="inline-block bg-red-600 text-white px-4 py-1 rounded-full text-sm font-black mb-4 animate-pulse uppercase tracking-widest">
+                  🔥 ¡NUEVAS PROMOS!
+                </div>
                 <h1 className="text-6xl md:text-8xl lg:text-9xl font-black leading-none mb-6 drop-shadow-[0_10px_20px_rgba(234,179,8,0.4)] uppercase italic font-['Montserrat',_sans-serif]">
                   Sabor <br /> <span className="text-yellow-500 tracking-tight">Extremo</span>
                 </h1>
@@ -320,6 +323,43 @@ export default function App() {
                   className="relative z-10 w-full rounded-[50px] shadow-2xl border-2 border-white/5 rotate-1 hover:rotate-0 transition-transform duration-500"
                   alt="Mega Burger"
                 />
+              </div>
+            </div>
+
+            {/* PROMO SECTION */}
+            <div className="mt-24 w-full">
+              <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-4">
+                <h2 className="text-4xl md:text-6xl font-black uppercase italic font-['Montserrat',_sans-serif]">
+                  OFERTAS <span className="text-yellow-500">RELÁMPAGO</span>
+                </h2>
+                <div className="h-1 flex-1 bg-gradient-to-r from-yellow-500/50 to-transparent ml-4 hidden md:block"></div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {PRODUCTOS.filter(p => p.categoria === 'Combos').map(prod => (
+                  <div key={prod.id} className="group relative bg-zinc-900/50 rounded-[40px] p-6 border border-white/5 hover:border-yellow-500/30 transition-all duration-500 flex flex-col sm:flex-row gap-6 items-center overflow-hidden">
+                    <div className="absolute inset-0 bg-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    
+                    <div className="relative w-full sm:w-48 h-48 rounded-[30px] overflow-hidden flex-none">
+                      <img src={prod.imagen} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={prod.nombre} />
+                      <div className="absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-black shadow-lg">PROMO</div>
+                    </div>
+
+                    <div className="flex-1 text-center sm:text-left relative z-10">
+                      <h3 className="text-2xl font-black mb-2 uppercase tracking-tight">{prod.nombre}</h3>
+                      <p className="text-zinc-400 text-sm mb-4 line-clamp-2 italic">{prod.descripcion}</p>
+                      <div className="flex items-center justify-center sm:justify-start gap-4">
+                        <span className="text-3xl font-black text-yellow-500">${prod.precio}</span>
+                        <button 
+                          onClick={() => agregarAlCarrito(prod)}
+                          className="bg-white text-black px-6 py-2 rounded-xl font-bold hover:bg-yellow-500 transition-colors active:scale-95 text-sm"
+                        >
+                          AGREGAR
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
