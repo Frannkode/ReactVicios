@@ -326,8 +326,7 @@ export default function App() {
         )}
 
         {view === 'menu' && (
-          <div className="md:grid md:grid-cols-3 gap-8 items-start">
-            <div className="md:col-span-2">
+          <div>
             <h1 className="text-5xl md:text-7xl text-center mb-16 uppercase tracking-tighter font-['Montserrat',_sans-serif]">Nuestra <span className="text-yellow-500 italic">Carta</span></h1>
             
             {VISIBLE_CATEGORIES.map(cat => {
@@ -411,8 +410,6 @@ export default function App() {
               </section>
             );
           })}
-            </div>
-            <div className="hidden md:block md:col-span-1"><CartSidebar /></div>
           </div>
         )}
 
