@@ -9,6 +9,8 @@ import superViciosImg from './assets/img/supervicios.jpg';
 import papasImg from './assets/img/papas.jpg';
 import papasGrandesImg from './assets/img/papasgrandes.jpg';
 import crispyImg from './assets/img/crispy.jpg';
+import mini4Img from './assets/img/4minihamburguesas.jpeg';
+import mini6Img from './assets/img/6minihamburguesaspapasconcheddar.jpeg';
 
 
 /**
@@ -104,11 +106,27 @@ const PRODUCTOS = [
     descripcion: "Papas fritas grandes, crujientes",
     precio: 6000,
     imagen: papasGrandesImg
+  },
+  {
+    id: 12,
+    categoria: "Combos",
+    nombre: "4 MINI HAMBURGUESAS",
+    descripcion: "4 mini hamburguesa, 2 salsas y papas con cheddar",
+    precio: 14000,
+    imagen: mini4Img
+  },
+  {
+    id: 13,
+    categoria: "Combos",
+    nombre: "6 MINI HAMBURGUESAS",
+    descripcion: "6 mini hamburguesas, Papas con cheddar, 2 salsas",
+    precio: 18000,
+    imagen: mini6Img
   }
 ];
 
 // Categorías mostradas en el menú (para deshabilitar secciones, quitar de esta lista)
-const VISIBLE_CATEGORIES = ['Hamburguesas', 'Fritas'];
+const VISIBLE_CATEGORIES = ['Hamburguesas', 'Combos', 'Fritas'];
 
 const Popup = ({ mensaje, tipo, visible }) => (
   <div className={`fixed top-10 left-1/2 -translate-x-1/2 z-[100] transition-all duration-300 transform ${visible ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0 pointer-events-none'}`}>
@@ -317,7 +335,7 @@ export default function App() {
               return (
               <section key={cat} className="mb-24">
                 <div className="flex items-center gap-4 mb-10 border-b border-white/10 pb-4">
-                  <span className="text-4xl">{cat === 'Hamburguesas' ? '🍔' : cat === 'Sandwiches' ? '🥪' : '🍟'}</span>
+                  <span className="text-4xl">{cat === 'Hamburguesas' ? '🍔' : cat === 'Combos' ? '🎁' : cat === 'Sandwiches' ? '🥪' : '🍟'}</span>
                     <h2 className="text-4xl md:text-5xl tracking-tighter text-yellow-500 font-extrabold">{displayCat}</h2>
                 </div>
 
