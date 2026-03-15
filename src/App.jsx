@@ -43,7 +43,7 @@ const PRODUCTOS = [
     descripcion: "Pan de papa, doble carne, doble cheddar, panceta, lechuga, tomate, mayonesa",
     precio: 7200,
     imagen: viciosEspecialImg,
-    agotado: true
+    agotado: false
   },
   {
     id: 4,
