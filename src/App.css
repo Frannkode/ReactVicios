@@ -1,47 +1,25 @@
+:root {
+  --accent: #eab308;
+  --accent-light: #fde047;
+  --bg-dark: #09090b;
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
 #root {
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Base Styles */
+body {
+  background-color: var(--bg-dark);
+  color: white;
+  -webkit-font-smoothing: antialiased;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-/* Oculta el scrollbar en contenedores con scroll horizontal y añade comportamiento suave */
+/* Oculta el scrollbar */
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -51,90 +29,90 @@
   display: none;
 }
 
-/* Mejora el snap en navegadores que lo soportan */
-.snap-start {
-  scroll-snap-align: start;
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
 }
 
-/* Custom visual helpers for a modern look */
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 20px rgba(234, 179, 8, 0.2); }
+  50% { box-shadow: 0 0 50px rgba(234, 179, 8, 0.4); }
+  100% { box-shadow: 0 0 20px rgba(234, 179, 8, 0.2); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-premium {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Buttons */
 .btn {
-  border-radius: 14px;
-  padding: 0.6rem 1rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  border-radius: 18px;
+  padding: 0.8rem 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-cta {
-  background: linear-gradient(180deg, var(--accent), #f6b53b);
-  color: #0b0b0b;
-  box-shadow: 0 12px 30px rgba(255,210,74,0.12);
-}
-.btn-cta:hover { transform: translateY(-3px) scale(1.01); }
-
-.btn-add { background: linear-gradient(180deg, #ffffff, #f7f7f7); color: #0b0b0b; }
-.btn-add:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.45); }
-
-.brand { letter-spacing: -0.02em; }
-
-.card-elevated { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius: var(--radius-md); box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
-
-.badge-pill { padding: 0.2rem 0.5rem; border-radius: 999px; font-weight: 800; }
-
-/* subtle glass highlight for section backgrounds */
-.glass { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.03); }
-
-/* New layout and component styles */
-.header-hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
+  background: linear-gradient(to right, #eab308, #ef4444);
+  color: black;
+  box-shadow: 0 10px 30px rgba(234, 179, 8, 0.3);
 }
 
-.hero-left h1 { font-size: clamp(2.5rem, 5vw, 5.5rem); line-height: 0.95; }
-.hero-cta { display: inline-flex; align-items: center; gap: 0.75rem; }
-
-.product-card {
-  border-radius: 20px;
-  overflow: hidden;
-  background: linear-gradient(180deg, rgba(255,255,255,0.012), rgba(0,0,0,0.08));
-  transition: transform 320ms cubic-bezier(.2,.9,.2,1), box-shadow 320ms;
-}
-.product-card:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(0,0,0,0.6); }
-.product-img { height: 160px; object-fit: cover; width: 100%; display: block; }
-.product-body { padding: 1rem; }
-.product-title { font-weight: 900; letter-spacing: -0.02em; }
-.product-meta { color: var(--muted); font-size: 0.9rem; }
-.price-badge { background: linear-gradient(180deg, var(--accent), #f6b53b); color: #0b0b0b; padding: 0.25rem 0.6rem; border-radius: 12px; font-weight: 800; }
-
-.cart-sidebar {
-  position: sticky;
-  top: 96px;
-  align-self: start;
-  padding: 1rem;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.5), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,255,255,0.03);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+.btn-cta:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(234, 179, 8, 0.4);
 }
 
-.cart-item { display: flex; gap: 0.75rem; align-items: center; padding: 0.5rem; border-radius: 12px; }
-.cart-item img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; }
-
-.mobile-nav-cta { position: fixed; bottom: 20px; right: 20px; z-index: 60; }
-
-/* Responsive tweaks */
-@media (min-width: 768px) {
-  .product-img { height: 200px; }
+/* Card Improvements */
+.card-elevated {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Respect prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
+.card-elevated:hover {
+  transform: translateY(-12px) scale(1.02);
+  border-color: rgba(234, 179, 8, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+/* Text Gradients */
+.text-gradient-premium {
+  background: linear-gradient(to right, #fff, #a1a1aa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 15vw;
+  }
 }
 
 /* Respect existing helpers */
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
+
