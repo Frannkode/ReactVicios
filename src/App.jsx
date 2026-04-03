@@ -125,7 +125,7 @@ const PRODUCTOS = [
     descripcion: "4 mini hamburguesa, 2 salsas y papas con cheddar",
     precio: 14000,
     imagen: mini4Img,
-    agotado: true
+    agotado: false
   },
   {
     id: 13,
@@ -134,7 +134,7 @@ const PRODUCTOS = [
     descripcion: "6 mini hamburguesas, Papas con cheddar, 2 salsas",
     precio: 18000,
     imagen: mini6Img,
-    agotado: true
+    agotado: false
   }
 ];
 
