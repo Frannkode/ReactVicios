@@ -9,8 +9,6 @@ import superViciosImg from './assets/img/supervicios.jpg';
 import papasImg from './assets/img/papas.jpg';
 import papasGrandesImg from './assets/img/papasgrandes.jpg';
 import crispyImg from './assets/img/crispy.jpg';
-import mini4Img from './assets/img/4minihamburguesas.jpeg';
-import mini6Img from './assets/img/6minihamburguesaspapasconcheddar.jpeg';
 
 
 /**
@@ -117,29 +115,11 @@ const PRODUCTOS = [
     precio: 6000,
     imagen: papasGrandesImg,
     agotado: false
-  },
-  {
-    id: 12,
-    categoria: "Combos",
-    nombre: "4 MINI HAMBURGUESAS",
-    descripcion: "4 mini hamburguesa, 2 salsas y papas con cheddar",
-    precio: 14000,
-    imagen: mini4Img,
-    agotado: true
-  },
-  {
-    id: 13,
-    categoria: "Combos",
-    nombre: "6 MINI HAMBURGUESAS",
-    descripcion: "6 mini hamburguesas, Papas con cheddar, 2 salsas",
-    precio: 18000,
-    imagen: mini6Img,
-    agotado: true
   }
 ];
 
 // Categorías mostradas en el menú (para deshabilitar secciones, quitar de esta lista)
-const VISIBLE_CATEGORIES = ['Hamburguesas', 'Combos', 'Fritas'];
+const VISIBLE_CATEGORIES = ['Hamburguesas', 'Fritas'];
 
 const Popup = ({ mensaje, tipo, visible }) => (
   <div className={`fixed top-10 left-1/2 -translate-x-1/2 z-[100] transition-all duration-300 transform ${visible ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0 pointer-events-none'}`}>
@@ -364,43 +344,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* PROMO SECTION */}
-            <div className="w-full">
-              <div className="flex flex-col items-center mb-16 gap-4">
-                <div className="w-20 h-1.5 bg-yellow-500 rounded-full mb-2"></div>
-                <h2 className="text-5xl md:text-7xl font-black uppercase italic font-['Montserrat',_sans-serif] text-center">
-                  OFERTAS <span className="text-yellow-500 tracking-tighter">LIMITED</span>
-                </h2>
-                <p className="text-zinc-500 font-bold uppercase tracking-[0.3em] text-sm">Prueba lo nuevo de la semana</p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-10">
-                {PRODUCTOS.filter(p => p.categoria === 'Combos').map(prod => (
-                  <div key={prod.id} className="group relative bg-zinc-900/30 backdrop-blur-xl rounded-[50px] p-8 border border-white/5 hover:border-yellow-500/40 transition-all duration-500 flex flex-col sm:flex-row gap-8 items-center overflow-hidden shadow-2xl">
-                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
-
-                    <div className="relative w-full sm:w-56 h-56 rounded-[40px] overflow-hidden flex-none shadow-2xl">
-                      <img src={prod.imagen} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={prod.nombre} />
-                      <div className="absolute top-4 left-4 bg-red-600 text-white px-4 py-1.5 rounded-2xl text-[10px] font-black shadow-lg uppercase tracking-widest border border-white/20 animate-pulse">PROMO 🔥</div>
-                    </div>
-
-                    <div className="flex-1 text-center sm:text-left relative z-10 flex flex-col h-full py-2">
-                      <h3 className="text-3xl font-black mb-3 uppercase tracking-tighter group-hover:text-yellow-500 transition-colors leading-none">{prod.nombre}</h3>
-                      <p className="text-zinc-400 text-base mb-8 line-clamp-3 italic leading-snug font-medium">{prod.descripcion}</p>
-                      <div className="mt-auto flex items-center justify-between gap-4">
-                        <span className="text-4xl font-black text-white tracking-tighter filter drop-shadow-[0_4px_10px_rgba(255,255,255,0.1)]">${prod.precio}</span>
-                        <button
-                          onClick={() => agregarAlCarrito(prod)}
-                          className="bg-yellow-500 hover:bg-white text-black px-8 py-3 rounded-2xl font-black hover:scale-105 transition-all active:scale-95 shadow-lg flex items-center gap-2 group/btn"
-                        >
-                          AGREGAR <Plus size={20} strokeWidth={4} className="group-hover/btn:rotate-90 transition-transform" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* PROMO SECTION (oculta temporalmente por falta de stock) */}
           </div>
         )}
 
