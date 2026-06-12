@@ -5,6 +5,7 @@ import megaViciosImg from './assets/img/megavicios.jpg';
 import decampoImg from './assets/img/decampo.jpg';
 import viciosComunImg from './assets/img/vicioscomun.jpg';
 import hamburguesaArgImg from './assets/img/hamburguesaargentina.jpeg';
+import cajaArgentinaImg from './assets/img/cajaargentina.jpeg';
 import sandwicheImg from './assets/img/sandwiche.jpg';
 import superViciosImg from './assets/img/supervicios.jpg';
 import papasImg from './assets/img/papas.jpg';
@@ -134,11 +135,21 @@ const PRODUCTOS = [
     precio: 7500,
     imagen: papasGrandesImg,
     agotado: false
+  },
+  {
+    id: 13,
+    categoria: "Extras",
+    nombre: "Caja de Argentina",
+    descripcion: "Caja especial de Argentina",
+    precio: 2000,
+    precioOculto: true,
+    imagen: cajaArgentinaImg,
+    agotado: false
   }
 ];
 
 // Categorías mostradas en el menú (para deshabilitar secciones, quitar de esta lista)
-const VISIBLE_CATEGORIES = ['Hamburguesas', 'Fritas'];
+const VISIBLE_CATEGORIES = ['Hamburguesas', 'Fritas', 'Extras'];
 
 const Stars = () => (
   <svg width="152" height="28" viewBox="0 0 152 28">
@@ -194,7 +205,6 @@ export default function App() {
   const [activeCard, setActiveCard] = useState(null);
   const [delivery, setDelivery] = useState(false);
   const [address, setAddress] = useState('');
-  const [argentinaBox, setArgentinaBox] = useState(false);
 
   const getTagClass = (tag) => {
     const t = tag.toLowerCase();
@@ -266,16 +276,17 @@ export default function App() {
   const subtotal = carrito.reduce((acc, item) => acc + ((item.precio || 0) * item.cantidad), 0);
   const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
   const SHIPPING = 600;
-  const ARGENTINA_BOX_FEE = 3000;
   const totalCarrito = subtotal;
-  const finalTotal = subtotal + (delivery ? SHIPPING : 0) + (argentinaBox ? ARGENTINA_BOX_FEE : 0);
+  const finalTotal = subtotal + (delivery ? SHIPPING : 0);
 
   const enviarWhatsapp = () => {
     if (carrito.length === 0) return;
     if (delivery && address.trim() === '') { triggerPopup('Ingrese dirección para envío', 'error'); return; }
     let mensaje = "¡Hola Vicio's Burger! 🍔 Quiero realizar este pedido:\n\n";
     carrito.forEach(item => {
-      if (item.precio) {
+      if (item.precioOculto) {
+        mensaje += `✅ ${item.cantidad}x ${item.nombre}\n`;
+      } else if (item.precio) {
         mensaje += `✅ ${item.cantidad}x ${item.nombre} - $${item.precio * item.cantidad}\n`;
       } else {
         mensaje += `✅ ${item.cantidad}x ${item.nombre} - Precio: Próximamente\n`;
@@ -286,9 +297,6 @@ export default function App() {
       mensaje += `🚚 Envío: Sí - $${SHIPPING}\n📍 Dirección: ${address}\n`;
     } else {
       mensaje += `🚚 Envío: No (Retiro)\n`;
-    }
-    if (argentinaBox) {
-      mensaje += `📦 Caja de Argentina: Sí - $${ARGENTINA_BOX_FEE}\n`;
     }
     mensaje += `\n💰 *Total: $${finalTotal}*`;
     const url = `https://wa.me/543482535194?text=${encodeURIComponent(mensaje)}`;
@@ -310,7 +318,7 @@ export default function App() {
               <img src={item.imagen} alt={item.nombre} />
               <div className="flex-1">
                 <div className="text-sm font-bold">{item.nombre}</div>
-                <div className="text-xs text-zinc-400">{item.precio ? `$${item.precio}` : 'Próximamente'}</div>
+                <div className="text-xs text-zinc-400">{item.precioOculto ? 'Especial' : item.precio ? `$${item.precio}` : 'Próximamente'}</div>
               </div>
               <div className="flex items-center gap-2">
                 <button onClick={() => quitarDelCarrito(item.id)} className="p-1 text-zinc-400 hover:text-white">-</button>
@@ -482,7 +490,7 @@ export default function App() {
                             <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent" />
                             <div className="absolute bottom-4 left-6">
                               <span className="bg-[#74ACDF] text-black px-3 py-0.5 rounded-lg text-sm font-bold shadow-md badge-pill">
-                                {prod.precio ? `$${prod.precio}` : 'Próximamente'}
+                                {prod.precioOculto ? 'Caja especial' : prod.precio ? `$${prod.precio}` : 'Próximamente'}
                               </span>
                             </div>
                           </div>
@@ -559,7 +567,7 @@ export default function App() {
                     <img src={item.imagen} className="w-14 h-14 object-cover rounded-lg shadow-md" />
                     <div className="flex-1 text-left">
                       <h3 className="text-lg leading-none uppercase tracking-tight mb-1">{item.nombre}</h3>
-                      <p className="text-[#74ACDF] text-xl font-extrabold">{item.precio ? `$${item.precio} × ${item.cantidad}` : 'Próximamente'}</p>
+                      <p className="text-[#74ACDF] text-xl font-extrabold">{item.precioOculto ? 'Especial' : item.precio ? `$${item.precio} × ${item.cantidad}` : 'Próximamente'}</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="flex bg-zinc-950 rounded-lg p-0.5 border border-white/5 shadow-inner">
@@ -590,26 +598,6 @@ export default function App() {
                         <input id="direccion" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Dirección de envío" className="w-full bg-zinc-800 text-white p-2 rounded-lg border border-white/5" />
                       </div>
                     )}
-                    <div className="flex items-start gap-3 mb-4">
-                      <label htmlFor="argentinaBox" className="group flex cursor-pointer items-center gap-3 rounded-2xl border border-zinc-700 bg-zinc-950 px-3 py-3 text-sm font-sans font-semibold text-zinc-200 transition-shadow duration-200 hover:border-[#74ACDF] hover:shadow-[0_0_0_4px_rgba(116,172,223,0.12)]">
-                        <span className="relative flex h-5 w-5 items-center justify-center rounded-lg border border-zinc-700 bg-zinc-900 text-transparent shadow-inner transition-colors duration-200 group-hover:border-[#74ACDF] group-focus-within:border-[#74ACDF]">
-                          <input
-                            id="argentinaBox"
-                            type="checkbox"
-                            checked={argentinaBox}
-                            onChange={() => setArgentinaBox(prev => !prev)}
-                            className="peer sr-only"
-                          />
-                          <span className="pointer-events-none absolute inset-0 rounded-lg bg-zinc-900 transition-colors duration-200 peer-checked:bg-[#74ACDF]" />
-                          <svg className="pointer-events-none h-3.5 w-3.5 text-black opacity-0 transition-opacity duration-200 peer-checked:opacity-100" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 0 0-1.414 0L8 12.586 4.707 9.293a1 1 0 0 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l8-8a1 1 0 0 0 0-1.414z" clipRule="evenodd" />
-                          </svg>
-                        </span>
-                        <span className="font-sans text-sm leading-tight text-zinc-200">
-                          Quiero el pedido en caja de Argentina (+$3000)
-                        </span>
-                      </label>
-                    </div>
                   </div>
                   <div className="flex flex-col gap-2 mb-4 border-b border-zinc-800 pb-4 relative z-10">
                     <div className="flex justify-between items-center">
@@ -620,12 +608,6 @@ export default function App() {
                       <div className="flex justify-between items-center">
                         <span className="text-lg text-zinc-400 uppercase tracking-widest">Envío:</span>
                         <span className="text-lg text-zinc-400">${SHIPPING}</span>
-                      </div>
-                    )}
-                    {argentinaBox && (
-                      <div className="flex justify-between items-center">
-                        <span className="text-lg text-zinc-400 uppercase tracking-widest">Caja Argentina:</span>
-                        <span className="text-lg text-zinc-400">${ARGENTINA_BOX_FEE}</span>
                       </div>
                     )}
                     <div className="flex justify-between items-center">
