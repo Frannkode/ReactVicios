@@ -4,17 +4,36 @@ import viciosEspecialImg from './assets/img/viciosespecial.jpg';
 import megaViciosImg from './assets/img/megavicios.jpg';
 import decampoImg from './assets/img/decampo.jpg';
 import viciosComunImg from './assets/img/vicioscomun.jpg';
+import hamburguesaArgImg from './assets/img/hamburguesaargentina.jpeg';
 import sandwicheImg from './assets/img/sandwiche.jpg';
 import superViciosImg from './assets/img/supervicios.jpg';
 import papasImg from './assets/img/papas.jpg';
 import papasGrandesImg from './assets/img/papasgrandes.jpg';
 import crispyImg from './assets/img/crispy.jpg';
 
+const FlagAR = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bandera de Argentina">
+    <rect width="60" height="40" fill="#75AADB" />
+    <rect y="13" width="60" height="14" fill="#FFFFFF" />
+    <rect y="26" width="60" height="14" fill="#75AADB" />
+  </svg>
+);
+
 
 /**
  * DATOS DE PRODUCTOS
  */
 const PRODUCTOS = [
+
+  {
+    id: 12,
+    categoria: "Hamburguesas",
+    nombre: "La 10",
+    descripcion: "Pan de papa celeste, panceta, huevo, doble carne más papas fritas 🍟",
+    precio: 10000,
+    imagen: hamburguesaArgImg,
+    agotado: false
+  },
 
   {
     id: 1,
@@ -121,9 +140,41 @@ const PRODUCTOS = [
 // Categorías mostradas en el menú (para deshabilitar secciones, quitar de esta lista)
 const VISIBLE_CATEGORIES = ['Hamburguesas', 'Fritas'];
 
+const Stars = () => (
+  <svg width="152" height="28" viewBox="0 0 152 28">
+    {[0,1,2].map(i => (
+      <polygon key={i}
+        points="14,2 17.5,10 26,10 19.5,16 22,24 14,19 6,24 8.5,16 2,10 10.5,10"
+        fill="#F6C700" stroke="#F6C700" strokeWidth="1"
+        transform={`translate(${i * 40}, 0)`}
+      />
+    ))}
+    <polygon
+      points="14,2 17.5,10 26,10 19.5,16 22,24 14,19 6,24 8.5,16 2,10 10.5,10"
+      fill="none" stroke="#F6C700" strokeWidth="1.5"
+      transform="translate(120, 0)"
+    />
+    <text x="134" y="18" textAnchor="middle" fill="#F6C700"
+      fontSize="11" fontWeight="900" fontFamily="Montserrat, sans-serif">?</text>
+  </svg>
+);
+
+const CopaSVG = () => (
+  <svg viewBox="0 0 100 140" className="absolute opacity-[0.04] pointer-events-none select-none"
+    style={{ width: '320px', bottom: '-20px', right: '-40px', zIndex: 0 }}
+  >
+    <rect x="35" y="120" width="30" height="8" rx="2" fill="white"/>
+    <rect x="25" y="128" width="50" height="6" rx="2" fill="white"/>
+    <rect x="42" y="90" width="16" height="30" fill="white"/>
+    <ellipse cx="50" cy="55" rx="32" ry="38" fill="none" stroke="white" strokeWidth="6"/>
+    <path d="M18 30 Q5 30 5 50 Q5 75 18 80" fill="none" stroke="white" strokeWidth="5"/>
+    <path d="M82 30 Q95 30 95 50 Q95 75 82 80" fill="none" stroke="white" strokeWidth="5"/>
+  </svg>
+);
+
 const Popup = ({ mensaje, tipo, visible }) => (
   <div className={`fixed top-10 left-1/2 -translate-x-1/2 z-[100] transition-all duration-300 transform ${visible ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0 pointer-events-none'}`}>
-    <div className={`${tipo === 'success' ? 'bg-green-600' : 'bg-red-600'} text-white px-8 py-4 rounded-2xl shadow-2xl font-bold flex items-center gap-3 border-2 border-white/20 whitespace-nowrap text-lg`}>
+    <div className={`${tipo === 'success' ? 'bg-[#74ACDF]' : tipo === 'warning' ? 'bg-orange-500' : 'bg-red-600'} text-white px-8 py-4 rounded-2xl shadow-2xl font-bold flex items-center gap-3 border-2 border-white/20 whitespace-nowrap text-lg`}>
       {mensaje}
     </div>
   </div>
@@ -166,6 +217,17 @@ export default function App() {
     setTimeout(() => setPopup(prev => ({ ...prev, visible: false })), 2000);
   };
 
+  // Navigation helpers to ensure smooth scroll and small UX niceties
+  const goToMenu = () => {
+    setView('menu');
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch { /* noop */ }
+  };
+
+  const goHome = () => {
+    setView('home');
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch { /* noop */ }
+  };
+
   const agregarAlCarrito = (producto) => {
     if (producto.agotado) {
       triggerPopup(`¡${producto.nombre} no está disponible actualmente!`, 'error');
@@ -192,7 +254,7 @@ export default function App() {
       }
       return prev.filter(i => i.id !== id);
     });
-    triggerPopup(`Unidad removida`, 'error');
+    triggerPopup(`Unidad removida`, 'warning');
   };
 
   const eliminarItemTotal = (id) => {
@@ -271,16 +333,17 @@ export default function App() {
       <Popup {...popup} />
 
       {/* HEADER */}
-      <header className="fixed top-0 left-0 w-full z-40 bg-zinc-950/80 backdrop-blur-md border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center">
-        <div className="flex items-center gap-2 cursor-pointer transition-transform active:scale-95" onClick={() => setView('home')}>
+      <header className="relative fixed top-0 left-0 w-full z-40 bg-zinc-950/80 backdrop-blur-md py-4 px-6 md:px-12 flex justify-between items-center">
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#75AADB] via-white to-[#75AADB] opacity-80 pointer-events-none" />
+        <div className="flex items-center gap-2 cursor-pointer transition-transform active:scale-95" onClick={goHome}>
           <span className="text-2xl md:text-3xl font-black text-white tracking-tighter font-['Montserrat',_sans-serif] brand">VICIO'S</span>
-          <span className="text-2xl md:text-3xl font-black text-yellow-500 tracking-tighter font-['Montserrat',_sans-serif] brand">BURGER</span>
+          <span className="text-2xl md:text-3xl font-black text-[#74ACDF] tracking-tighter font-['Montserrat',_sans-serif] brand">BURGER</span>
         </div>
 
-        <div className="hidden md:flex gap-8 text-xl uppercase tracking-widest text-zinc-400">
-          <button onClick={() => setView('home')} className={`hover:text-yellow-500 transition-colors ${view === 'home' ? 'text-yellow-500' : ''}`}>Inicio</button>
-          <button onClick={() => setView('menu')} className={`hover:text-yellow-500 transition-colors ${view === 'menu' ? 'text-yellow-500' : ''}`}>Menú</button>
-          <button onClick={() => setView('cart')} className={`hover:text-yellow-500 transition-colors relative ${view === 'cart' ? 'text-yellow-500' : ''}`}>
+        <div className="hidden md:flex gap-8 text-sm uppercase tracking-widest text-zinc-400">
+          <button onClick={goHome} className={`hover:text-[#74ACDF] transition-colors ${view === 'home' ? 'text-[#74ACDF]' : ''}`}>Inicio</button>
+          <button onClick={goToMenu} className={`hover:text-[#74ACDF] transition-colors ${view === 'menu' ? 'text-[#74ACDF]' : ''}`}>Menú</button>
+          <button onClick={() => setView('cart')} className={`hover:text-[#74ACDF] transition-colors relative ${view === 'cart' ? 'text-[#74ACDF]' : ''}`}>
             Carrito
             {totalItems > 0 && <span className="absolute -top-3 -right-5 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-black animate-bounce">{totalItems}</span>}
           </button>
@@ -288,35 +351,42 @@ export default function App() {
       </header>
 
       {/* CONTENIDO */}
-      <main className="pt-24 pb-32 md:pb-12 max-w-7xl mx-auto px-4 md:px-8">
+      <main className="pt-20 md:pt-24 pb-32 md:pb-12 max-w-7xl mx-auto px-4 md:px-8">
 
         {view === 'home' && (
-          <div className="relative min-h-[90vh] flex flex-col items-center py-12">
+          <div className="relative flex flex-col items-center pt-4 pb-8 md:py-12">
             {/* Background Decorations */}
+            <div className="absolute -left-40 top-6 w-[160%] h-24 rotate-12 bg-gradient-to-r from-[#75AADB] to-white opacity-10 -z-20 rounded-full pointer-events-none" />
             <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-yellow-500/10 blur-[180px] rounded-full -z-10 animate-pulse" />
             <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-red-600/10 blur-[180px] rounded-full -z-10" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-500/5 blur-[200px] rounded-full -z-10" />
+            <div className="absolute top-1/2 right-0 w-[300px] h-[300px] rounded-full -z-10"
+              style={{ background: 'rgba(116, 172, 223, 0.06)', filter: 'blur(120px)' }} />
 
-            <div className="grid lg:grid-cols-2 gap-16 items-center w-full mb-32 relative z-10">
-              <div className="text-center lg:text-left order-2 lg:order-1">
-                <div className="inline-flex items-center gap-2 bg-zinc-900/60 backdrop-blur-xl border border-white/10 px-5 py-2.5 rounded-full mb-8 animate-bounce shadow-[0_10px_40px_rgba(0,0,0,0.5)] border-white/20">
+            <div className="grid lg:grid-cols-2 gap-6 lg:gap-16 items-center w-full mb-8 md:mb-32 relative z-10">
+              <div className="text-center lg:text-left order-1">
+                <div className="flex justify-center lg:justify-start mb-4">
+                  <Stars />
+                </div>
+                <div className="relative inline-flex items-center gap-2 bg-zinc-900/60 backdrop-blur-xl border border-white/10 px-5 py-2.5 rounded-full mb-8 shadow-[0_10px_40px_rgba(0,0,0,0.5)] border-white/20">
                   <span className="flex h-3 w-3 bg-red-500 rounded-full animate-ping" />
-                  <span className="text-xs font-black tracking-[0.2em] uppercase text-white">¡NUEVAS OFERTAS! 🔥</span>
+                  <span className="text-xs font-black tracking-[0.2em] uppercase text-white">¡NUEVAS OFERTAS! 🔥 🇦🇷</span>
                 </div>
 
-                <h1 className="text-7xl md:text-[11rem] font-black leading-[0.8] mb-10 uppercase italic font-['Montserrat',_sans-serif] tracking-tighter">
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[7rem] font-black leading-none mb-10 uppercase italic font-['Montserrat',_sans-serif] tracking-tighter">
                   <span className="block text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]">SABOR</span>
-                  <span className="block bg-gradient-to-r from-yellow-300 via-orange-500 to-red-600 bg-clip-text text-transparent filter drop-shadow-[0_15px_35px_rgba(234,179,8,0.4)]">EXTREMO</span>
+                  <span className="block whitespace-nowrap bg-clip-text text-transparent filter drop-shadow-[0_15px_35px_rgba(234,179,8,0.4)]" style={{ backgroundImage: 'linear-gradient(90deg, #fde047, #f97316, #74ACDF)' }}>EXTREMO</span>
                 </h1>
 
-                <p className="text-xl md:text-3xl text-zinc-400 mb-14 max-w-lg mx-auto lg:mx-0 font-sans italic leading-relaxed font-medium">
-                  Las burgers más icónicas. <br className="hidden md:block" /> Un vicio del que no querrás salir. 🍔
+                <p className="text-base md:text-xl text-zinc-300 mb-8 md:mb-14 max-w-lg mx-auto lg:mx-0 font-sans italic leading-relaxed font-medium">
+                  Las burgers más <span style={{ color: '#74ACDF', fontWeight: 800 }}>icónicas</span>. <br className="hidden md:block" /> Un vicio del que no querrás salir. 🍔
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
                   <button
-                    onClick={() => setView('menu')}
-                    className="group relative bg-yellow-500 hover:bg-white text-black px-14 py-7 rounded-[35px] text-3xl font-black transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_25px_60px_rgba(234,179,8,0.4)] font-['Montserrat',_sans-serif] overflow-hidden"
+                    onClick={goToMenu}
+                    className="group relative text-black px-8 py-4 md:px-12 md:py-6 rounded-[35px] text-lg md:text-2xl font-black transition-all duration-500 hover:scale-105 hover:brightness-110 active:scale-95 shadow-[0_25px_60px_rgba(116,172,223,0.35)] font-['Montserrat',_sans-serif] overflow-hidden"
+                    style={{ background: '#74ACDF' }}
                   >
                     <span className="relative z-10">PEDIR AHORA</span>
                     <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -324,54 +394,71 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="relative order-1 lg:order-2 flex justify-center">
-                <div className="relative w-full max-w-[500px]">
+              <div className="relative order-2 flex justify-center pb-12">
+                <div className="relative w-full max-w-[500px] max-h-[300px] lg:max-h-none">
                   <div className="absolute inset-0 bg-yellow-500/20 blur-[120px] rounded-full animate-pulse" />
-                  <div className="relative z-10 p-4 bg-zinc-900/20 backdrop-blur-sm border border-white/10 rounded-[60px] transform hover:rotate-2 transition-transform duration-700 shadow-2xl overflow-hidden group">
+                  <svg aria-hidden className="absolute -top-16 left-1/4 w-[380px] h-[380px] opacity-10 -z-20" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <radialGradient id="g1" cx="50%" cy="50%">
+                        <stop offset="0%" stopColor="#F6E27A" stopOpacity="0.95" />
+                        <stop offset="70%" stopColor="#F6E27A" stopOpacity="0.25" />
+                        <stop offset="100%" stopColor="#F6E27A" stopOpacity="0" />
+                      </radialGradient>
+                    </defs>
+                    <circle cx="100" cy="100" r="60" fill="url(#g1)" />
+                    <g fill="#F2C94C">
+                      {[...Array(12)].map((_,i)=>null)}
+                    </g>
+                  </svg>
+                  <div className="relative z-10 p-4 bg-zinc-900/20 backdrop-blur-sm border border-white/10 rounded-[60px] transform hover:rotate-2 transition-transform duration-700 shadow-2xl overflow-hidden max-h-[300px] lg:max-h-none group ring-0 sm:ring-4 sm:ring-[#75AADB]/20">
                     <img
-                      src={PRODUCTOS[1].imagen}
-                      className="w-full rounded-[45px] transition-all duration-700 group-hover:scale-110"
-                      alt="Mega Burger"
+                      src={hamburguesaArgImg}
+                      className="w-full h-full object-cover max-h-[300px] lg:max-h-none rounded-[45px] transition-all duration-700 group-hover:scale-110"
+                      alt="La 10"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute -inset-0 rounded-[45px] pointer-events-none" />
                   </div>
                   {/* Floating badge */}
-                  <div className="absolute -bottom-6 -right-6 md:-right-12 z-20 bg-black/80 backdrop-blur-xl border-4 border-yellow-500/50 p-6 rounded-[35px] shadow-2xl transform rotate-6 hover:rotate-0 transition-all duration-500 cursor-default group">
-                    <div className="text-yellow-500 text-sm font-black uppercase tracking-tighter mb-1">Doble Carne</div>
-                    <div className="text-4xl font-black text-white italic group-hover:scale-110 transition-transform tracking-tighter">$6600</div>
+                  <div className="absolute -bottom-8 -right-6 md:-right-12 z-20 bg-black/80 backdrop-blur-xl border-4 border-[#74ACDF]/50 p-6 rounded-[35px] shadow-2xl transform rotate-6 hover:rotate-0 transition-all duration-500 cursor-default group min-w-[140px]">
+                    <div className="text-sm font-black uppercase tracking-tighter mb-1" style={{ color: '#74ACDF' }}>La 10</div>
+                    <div className="text-4xl font-black italic group-hover:scale-110 transition-transform tracking-tighter" style={{ color: '#74ACDF' }}>$10000</div>
                   </div>
+                  {/* 'La 10' badge */}
+                  <div className="absolute top-6 left-6 z-30 bg-[#75AADB]/10 border border-[#75AADB]/30 text-[#75AADB] px-4 py-2 rounded-full font-black tracking-tighter flex items-center gap-2">La 10 <span className="ml-1"><FlagAR className="w-4 h-3 inline-block" /></span></div>
                 </div>
               </div>
             </div>
 
             {/* PROMO SECTION (oculta temporalmente por falta de stock) */}
+            <CopaSVG />
           </div>
         )}
 
         {view === 'menu' && (
           <div>
-            <h1 className="text-5xl md:text-7xl text-center mb-16 uppercase tracking-tighter font-['Montserrat',_sans-serif]">Nuestra <span className="text-yellow-500 italic">Carta</span></h1>
+            <h1 className="text-5xl md:text-7xl text-center mb-8 uppercase tracking-tighter font-['Montserrat',_sans-serif]">Nuestra <span className="italic" style={{ color: '#74ACDF' }}>Carta</span></h1>
 
             {VISIBLE_CATEGORIES.map(cat => {
               const displayCat = cat === 'Hamburguesas' ? 'Burgas' : cat === 'Fritas' ? 'Papas' : cat;
               return (
-                <section key={cat} className="mb-24">
-                  <div className="flex items-center gap-4 mb-10 border-b border-white/10 pb-4">
+                <section key={cat} className="mb-10 md:mb-20">
+                  <div className="flex items-center gap-4 mb-6 border-b border-white/10 pb-4">
                     <span className="text-4xl">{cat === 'Hamburguesas' ? '🍔' : cat === 'Combos' ? '🎁' : cat === 'Sandwiches' ? '🥪' : '🍟'}</span>
-                    <h2 className="text-4xl md:text-5xl tracking-tighter text-yellow-500 font-extrabold">{displayCat}</h2>
+                    <h2 className="text-4xl md:text-5xl tracking-tighter font-extrabold" style={{ color: '#74ACDF' }}>{displayCat}</h2>
                   </div>
 
 
 
-                  <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 py-4 no-scrollbar" id={`category-${cat}`}>
+                  <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory py-4 no-scrollbar sm:grid sm:grid-cols-2 sm:overflow-visible sm:gap-6 lg:grid-cols-3 xl:grid-cols-4" id={`category-${cat}`}>
                     {PRODUCTOS.filter(p => p.categoria === cat).map(prod => {
                       const cant = carrito.find(i => i.id === prod.id)?.cantidad || 0;
                       const tags = prod.descripcion ? prod.descripcion.split(',').map(s => s.trim()).filter(Boolean) : [];
                       const visibleTags = tags.slice(0, 4);
                       return (
-                        <div key={prod.id} onClick={() => setActiveCard(prev => prev === prod.id ? null : prod.id)} className={`group bg-zinc-900 rounded-[40px] overflow-hidden border border-white/5 hover:border-yellow-500/50 transition-all duration-300 shadow-xl flex flex-col h-[320px] snap-start flex-none w-[240px] sm:w-auto cursor-pointer relative card-elevated ${prod.agotado ? 'opacity-70 grayscale-[0.5]' : ''}`}>
+                        <div key={prod.id} onClick={() => setActiveCard(prev => prev === prod.id ? null : prod.id)} className={`group bg-zinc-900 rounded-[40px] overflow-hidden border border-white/5 hover:border-[#74ACDF]/50 transition-all duration-300 shadow-xl flex flex-col min-h-[320px] snap-start flex-none w-[220px] sm:w-auto cursor-pointer relative card-elevated h-auto ${prod.agotado ? 'opacity-70 grayscale-[0.5]' : ''}`}>
 
-                          <div className="relative h-[190px] overflow-hidden">
+                          <div className="relative h-[160px] overflow-hidden">
                             {prod.agotado && (
                               <div className="absolute inset-0 bg-black/60 z-20 flex items-center justify-center backdrop-blur-sm">
                                 <span className="bg-red-600 text-white px-6 py-2 rounded-full font-black text-xl tracking-tighter shadow-2xl border-2 border-white/20 rotate-12">AGOTADO</span>
@@ -389,14 +476,14 @@ export default function App() {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent" />
                             <div className="absolute bottom-4 left-6">
-                              <span className="bg-yellow-500 text-black px-3 py-0.5 rounded-lg text-sm font-bold shadow-md badge-pill">
+                              <span className="bg-[#74ACDF] text-black px-3 py-0.5 rounded-lg text-sm font-bold shadow-md badge-pill">
                                 {prod.precio ? `$${prod.precio}` : 'Próximamente'}
                               </span>
                             </div>
                           </div>
 
-                          <div className="p-4 flex flex-col flex-grow text-center sm:text-left">
-                            <h3 className="text-xl mb-1 uppercase tracking-tight leading-tight min-h-[2rem] flex items-center justify-center sm:justify-start font-extrabold">
+                          <div className="p-4 flex flex-col flex-grow text-left">
+                            <h3 className="text-base mb-1 uppercase tracking-tight leading-tight line-clamp-2 flex items-center justify-start font-extrabold">
                               {prod.nombre}
                             </h3>
                             <div className="flex flex-wrap gap-1 justify-center sm:justify-start mb-3 max-h-[2.6rem] overflow-hidden items-center">
@@ -404,21 +491,22 @@ export default function App() {
                                 <span key={i} className={`${getTagClass(tag)} px-1 py-0.5 rounded-sm border border-white/5 inline-block max-w-[90px] truncate text-[9px]`}>{tag}</span>
                               ))}
                               {tags.length > visibleTags.length && (
-                                <span className="text-[9px] bg-yellow-500 text-black px-1 py-0.5 rounded-sm font-bold ml-1">+{tags.length - visibleTags.length}</span>
+                                <span className="text-[9px] bg-[#74ACDF] text-black px-1 py-0.5 rounded-sm font-bold ml-1">+{tags.length - visibleTags.length}</span>
                               )}
                             </div>
 
                             <div className="mt-auto flex gap-3 items-center">
-                              <button
+                                <button
                                 disabled={prod.agotado}
                                 onClick={(e) => { e.stopPropagation(); agregarAlCarrito(prod); }}
-                                className={`flex-1 ${prod.agotado ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed' : 'bg-yellow-500 hover:bg-yellow-600 text-black btn-add'} py-3 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 font-black text-sm shadow-lg`}
+                                className={`flex-1 ${prod.agotado ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed' : 'bg-[#74ACDF] hover:bg-[#5a96c9] text-black btn-add'} py-3 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 font-black text-sm shadow-lg`}
                               >
                                 {prod.agotado ? 'NO DISPONIBLE' : <><Plus size={20} strokeWidth={4} /> AÑADIR</>}
                               </button>
                               {cant > 0 && !prod.agotado && (
                                 <button
                                   onClick={(e) => { e.stopPropagation(); quitarDelCarrito(prod.id); }}
+                                  aria-label={`Quitar una unidad de ${prod.nombre}`}
                                   className="bg-zinc-800 hover:bg-red-600 text-white w-12 h-12 rounded-xl flex items-center justify-center transition-all active:scale-95 shadow-md border border-white/5"
                                 >
                                   <Minus size={18} strokeWidth={3} />
@@ -446,14 +534,14 @@ export default function App() {
 
         {view === 'cart' && (
           <div className="max-w-2xl mx-auto px-2">
-            <h1 className="text-5xl md:text-7xl text-center mb-12 uppercase italic">Tu <span className="text-yellow-500 tracking-tighter">Bolsa</span></h1>
+            <h1 className="text-5xl md:text-7xl text-center mb-6 uppercase italic">Tu <span className="tracking-tighter" style={{ color: '#74ACDF' }}>Bolsa</span></h1>
 
             {carrito.length === 0 ? (
               <div className="text-center py-16 bg-zinc-900/40 rounded-[30px] border-2 border-dashed border-white/10">
                 <ShoppingCart size={64} className="mx-auto mb-4 text-zinc-600" />
                 <p className="text-xl text-zinc-400 mb-6 uppercase">Tu bolsa está vacía</p>
                 <button
-                  onClick={() => setView('menu')}
+                  onClick={goToMenu}
                   className="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-2 rounded-lg text-lg font-black uppercase transition-transform hover:scale-105 shadow-md"
                 >
                   IR A COMER
@@ -462,23 +550,21 @@ export default function App() {
             ) : (
               <div className="space-y-5">
                 {carrito.map(item => (
-                  <div key={item.id} className="flex flex-col sm:flex-row gap-4 bg-zinc-900 p-3 rounded-[20px] items-center border border-white/5 shadow-lg">
-                    <img src={item.imagen} className="w-20 h-20 object-cover rounded-lg shadow-md" />
-                    <div className="flex-1 text-center sm:text-left">
+                  <div key={item.id} className="flex flex-row gap-4 bg-zinc-900 p-3 rounded-[20px] items-center border border-white/5 shadow-lg">
+                    <img src={item.imagen} className="w-14 h-14 object-cover rounded-lg shadow-md" />
+                    <div className="flex-1 text-left">
                       <h3 className="text-lg leading-none uppercase tracking-tight mb-1">{item.nombre}</h3>
-                      <div className="flex items-center justify-center sm:justify-start gap-3">
-                        <p className="text-yellow-500 text-xl font-extrabold">{item.precio ? `${item.precio}` : 'Próximamente'}</p>
-                        <span className="text-zinc-600 text-lg font-sans font-bold">× {item.cantidad}</span>
-                      </div>
+                      <p className="text-[#74ACDF] text-xl font-extrabold">{item.precio ? `$${item.precio} × ${item.cantidad}` : 'Próximamente'}</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="flex bg-zinc-950 rounded-lg p-0.5 border border-white/5 shadow-inner">
-                        <button onClick={() => quitarDelCarrito(item.id)} className="p-1 text-zinc-500 hover:text-white transition-colors"><Minus size={16} /></button>
+                        <button onClick={() => quitarDelCarrito(item.id)} aria-label={`Quitar una unidad de ${item.nombre}`} className="p-1 text-zinc-500 hover:text-white transition-colors"><Minus size={16} /></button>
                         <span className="px-2 text-lg min-w-[34px] text-center flex items-center justify-center">{item.cantidad}</span>
-                        <button onClick={() => agregarAlCarrito(item)} className="p-1 text-zinc-500 hover:text-white transition-colors"><Plus size={16} /></button>
+                        <button onClick={() => agregarAlCarrito(item)} aria-label={`Agregar una unidad de ${item.nombre}`} className="p-1 text-zinc-500 hover:text-white transition-colors"><Plus size={16} /></button>
                       </div>
                       <button
                         onClick={() => eliminarItemTotal(item.id)}
+                        aria-label={`Eliminar ${item.nombre}`}
                         className="text-red-500 hover:bg-red-500/10 p-2 rounded-lg transition-all active:scale-90"
                       >
                         <X size={20} strokeWidth={2} />
@@ -490,12 +576,13 @@ export default function App() {
                 <div className="mt-8 bg-zinc-900 p-6 rounded-[30px] border-2 border-white/5 shadow-2xl overflow-hidden relative card-elevated">
                   <div className="mb-4">
                     <div className="flex items-center justify-center gap-3 mb-2">
-                      <button onClick={() => setDelivery(false)} className={`px-3 py-1 rounded-full ${!delivery ? 'bg-yellow-500 text-black font-bold' : 'bg-zinc-800 text-zinc-300'}`}>Retiro</button>
-                      <button onClick={() => setDelivery(true)} className={`px-3 py-1 rounded-full ${delivery ? 'bg-yellow-500 text-black font-bold' : 'bg-zinc-800 text-zinc-300'}`}>Envío 🚚</button>
+                      <button onClick={() => setDelivery(false)} className={`px-3 py-1 rounded-full ${!delivery ? 'bg-[#74ACDF] text-black font-bold' : 'bg-zinc-800 text-zinc-300'}`}>Retiro</button>
+                      <button onClick={() => setDelivery(true)} className={`px-3 py-1 rounded-full ${delivery ? 'bg-[#74ACDF] text-black font-bold' : 'bg-zinc-800 text-zinc-300'}`}>Envío 🚚</button>
                     </div>
                     {delivery && (
                       <div className="mb-3">
-                        <input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Dirección de envío" className="w-full bg-zinc-800 text-white p-2 rounded-lg border border-white/5" />
+                        <label htmlFor="direccion" className="sr-only">Dirección de envío</label>
+                        <input id="direccion" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Dirección de envío" className="w-full bg-zinc-800 text-white p-2 rounded-lg border border-white/5" />
                       </div>
                     )}
                   </div>
@@ -512,7 +599,7 @@ export default function App() {
                     )}
                     <div className="flex justify-between items-center">
                       <span className="text-lg text-zinc-400 uppercase tracking-widest">A PAGAR:</span>
-                      <span className="text-3xl md:text-4xl text-yellow-500 font-black tracking-tighter">${finalTotal}</span>
+                      <span className="text-3xl md:text-4xl text-[#74ACDF] font-black tracking-tighter">${finalTotal}</span>
                     </div>
                   </div>
                   <button
@@ -529,37 +616,38 @@ export default function App() {
       </main>
 
       {/* NAV MÓVIL */}
-      <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] bg-zinc-950/90 backdrop-blur-2xl border border-white/10 flex justify-around py-4 rounded-[28px] z-50 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+      <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] bg-zinc-950/90 backdrop-blur-2xl flex justify-around py-3 rounded-[28px] z-50 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#75AADB] via-white to-[#75AADB] rounded-t-[28px] opacity-80 pointer-events-none" />
         <button
-          onClick={() => setView('home')}
-          className={`flex flex-col items-center gap-1 transition-all transform ${view === 'home' ? 'text-yellow-500 scale-110' : 'text-zinc-600'}`}
+          onClick={goHome}
+          className={`flex flex-col items-center gap-1 transition-all transform ${view === 'home' ? 'text-[#74ACDF] scale-110' : 'text-zinc-600'}`}
         >
-          <Home size={26} strokeWidth={view === 'home' ? 3 : 2} />
+          <Home size={22} strokeWidth={view === 'home' ? 3 : 2} />
           <span className="text-[10px] uppercase font-bold tracking-widest">Inicio</span>
         </button>
         <button
-          onClick={() => setView('menu')}
-          className={`flex flex-col items-center gap-1 transition-all transform ${view === 'menu' ? 'text-yellow-500 scale-110' : 'text-zinc-600'}`}
+          onClick={goToMenu}
+          className={`flex flex-col items-center gap-1 transition-all transform ${view === 'menu' ? 'text-[#74ACDF] scale-110' : 'text-zinc-600'}`}
         >
-          <List size={26} strokeWidth={view === 'menu' ? 3 : 2} />
+          <List size={22} strokeWidth={view === 'menu' ? 3 : 2} />
           <span className="text-[10px] uppercase font-bold tracking-widest">Menú</span>
         </button>
         <button
           onClick={() => setView('cart')}
-          className={`relative flex flex-col items-center gap-1 transition-all transform ${view === 'cart' ? 'text-yellow-500 scale-110' : 'text-zinc-600'}`}
+          className={`relative flex flex-col items-center gap-1 transition-all transform ${view === 'cart' ? 'text-[#74ACDF] scale-110' : 'text-zinc-600'}`}
         >
           {totalItems > 0 && (
             <span className="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-zinc-950 font-black shadow-md">
               {totalItems}
             </span>
           )}
-          <ShoppingCart size={26} strokeWidth={view === 'cart' ? 3 : 2} />
+          <ShoppingCart size={22} strokeWidth={view === 'cart' ? 3 : 2} />
           <span className="text-[10px] uppercase font-bold tracking-widest">Carrito</span>
         </button>
       </nav>
 
       <footer className="py-6 text-center text-zinc-700 font-sans text-sm tracking-widest uppercase">
-        <div>&copy; 2026 VICIO'S BURGER.</div>
+        <div>&copy; {new Date().getFullYear()} VICIO'S BURGER.</div>
         <div className="mt-2 text-xs normal-case tracking-normal">
           Creado por <a href="mailto:poncefrancomiguel@gmail.com" className="text-yellow-500 underline">poncefrancomiguel@gmail.com!</a>
         </div>
