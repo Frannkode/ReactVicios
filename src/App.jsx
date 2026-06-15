@@ -141,7 +141,7 @@ const PRODUCTOS = [
     categoria: "Extras",
     nombre: "Caja de Argentina",
     descripcion: "Caja especial de Argentina",
-    precio: 2000,
+    precio: 1600,
     precioOculto: true,
     imagen: cajaArgentinaImg,
     agotado: false
