@@ -2,24 +2,15 @@ import viciosEspecialImg from '../assets/img/viciosespecial.jpg';
 import megaViciosImg from '../assets/img/megavicios.jpg';
 import decampoImg from '../assets/img/decampo.jpg';
 import viciosComunImg from '../assets/img/vicioscomun.jpg';
-import hamburguesaArgImg from '../assets/img/hamburguesaargentina.jpeg';
 import cajaArgentinaImg from '../assets/img/cajaargentina.jpeg';
 import sandwicheImg from '../assets/img/sandwiche.jpg';
 import superViciosImg from '../assets/img/supervicios.jpg';
 import papasImg from '../assets/img/papas.jpg';
 import papasGrandesImg from '../assets/img/papasgrandes.jpg';
 import crispyImg from '../assets/img/crispy.jpg';
+import panchoImg from '../assets/img/13ca3035-9748-43c2-91ff-98f9b6b82522.jpg';
 
 export const PRODUCTOS = [
-  {
-    id: 12,
-    categoria: "Hamburguesas",
-    nombre: "La 10",
-    descripcion: "Pan de papa celeste, panceta, huevo, doble carne más papas fritas 🍟",
-    precio: 10000,
-    imagen: hamburguesaArgImg,
-    agotado: false
-  },
   {
     id: 1,
     categoria: "Hamburguesas",
@@ -128,7 +119,34 @@ export const PRODUCTOS = [
     precioOculto: true,
     imagen: cajaArgentinaImg,
     agotado: false
+  },
+  {
+    id: 14,
+    categoria: "Panchos",
+    nombre: "Clásico",
+    descripcion: "Pan, salchicha, papas pay, aderezo a elección",
+    precio: 4000,
+    imagen: panchoImg,
+    agotado: false
+  },
+  {
+    id: 15,
+    categoria: "Panchos",
+    nombre: "JyQ",
+    descripcion: "Pan, salchicha, jamón, queso, papas pay y aderezo a elección",
+    precio: 5000,
+    imagen: panchoImg,
+    agotado: false
+  },
+  {
+    id: 16,
+    categoria: "Panchos",
+    nombre: "Cheddar y panceta",
+    descripcion: "Pan, salchicha, cheddar, panceta y aderezo a elección",
+    precio: 5600,
+    imagen: panchoImg,
+    agotado: false
   }
 ];
 
-export const VISIBLE_CATEGORIES = ['Hamburguesas', 'Fritas', 'Extras'];
+export const VISIBLE_CATEGORIES = ['Hamburguesas', 'Fritas', 'Panchos', 'Extras'];
