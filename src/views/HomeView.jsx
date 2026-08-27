@@ -1,5 +1,34 @@
+import panchoImg from '../assets/img/13ca3035-9748-43c2-91ff-98f9b6b82522.jpg';
+
 const HomeView = ({ goToMenu }) => (
   <div className="flex flex-col gap-6 pb-4">
+    {/* Hero card */}
+    <div className="relative rounded-[32px] overflow-hidden bg-[#161616] border border-white/5 shadow-2xl" style={{ minHeight: 280 }}>
+      <img
+        src={panchoImg}
+        className="absolute inset-0 w-full h-full object-cover"
+        alt="Panchos"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+      <div className="relative z-10 flex flex-col justify-end h-full p-6" style={{ minHeight: 280 }}>
+        <div className="inline-flex items-center gap-2 bg-red-500/20 border border-red-500/30 text-red-400 px-3 py-1 rounded-full text-xs font-bold mb-3 self-start">
+          <span className="w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse" />
+          NUEVO
+        </div>
+        <h2 className="text-3xl font-black leading-tight mb-1">Panchos 🌭</h2>
+        <p className="text-zinc-300 text-sm font-semibold mb-4">Clásico, JyQ y Cheddar y panceta</p>
+        <div className="flex items-center justify-between">
+          <span className="text-2xl font-black text-red-400">Desde $4.000</span>
+          <button
+            onClick={goToMenu}
+            className="bg-red-500 hover:bg-red-600 text-white px-5 py-2.5 rounded-2xl font-black text-sm transition-all active:scale-95 shadow-[0_4px_20px_rgba(239,68,68,0.4)]"
+          >
+            Ver menú →
+          </button>
+        </div>
+      </div>
+    </div>
+
     {/* Sección info rápida */}
     <div className="grid grid-cols-2 gap-3">
       <div className="bg-[#161616] border border-white/5 rounded-[20px] p-4 flex flex-col gap-1">
