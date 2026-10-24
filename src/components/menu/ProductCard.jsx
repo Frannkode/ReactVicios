@@ -1,4 +1,5 @@
 import { Plus } from 'lucide-react';
+import Cobweb from '../ui/Cobweb';
 
 const ProductCard = ({ prod, cant, setActiveCard, agregarAlCarrito }) => (
   <div
@@ -22,6 +23,7 @@ const ProductCard = ({ prod, cant, setActiveCard, agregarAlCarrito }) => (
         className="w-full h-full object-cover"
         alt={prod.nombre}
       />
+      <Cobweb size={56} className="z-10" />
     </div>
 
     {/* Info */}

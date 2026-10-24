@@ -1,4 +1,5 @@
 import halloweenImg from '../assets/img/hallowenn.png';
+import Cobweb from '../components/ui/Cobweb';
 
 const HomeView = ({ goToMenu }) => (
   <div className="flex flex-col gap-6 pb-4">
@@ -10,7 +11,9 @@ const HomeView = ({ goToMenu }) => (
         alt="Hamburguesas de Halloween: pan negro y pan naranja"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-      <span className="float-bat absolute top-4 right-5 text-3xl">🦇</span>
+      <Cobweb size={130} />
+      <Cobweb size={130} flip />
+      <span className="float-bat absolute top-5 left-1/2 -translate-x-1/2 text-3xl">🦇</span>
       <div className="relative z-10 flex flex-col justify-end h-full p-6" style={{ minHeight: 360 }}>
         <div className="inline-flex items-center gap-2 bg-red-500/20 border border-red-500/30 text-red-400 px-3 py-1 rounded-full text-xs font-bold mb-3 self-start">
           <span className="w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse" />
@@ -32,12 +35,14 @@ const HomeView = ({ goToMenu }) => (
 
     {/* Sección info rápida */}
     <div className="grid grid-cols-2 gap-3">
-      <div className="bg-[#161616] border border-white/5 rounded-[20px] p-4 flex flex-col gap-1">
+      <div className="relative overflow-hidden bg-[#161616] border border-white/5 rounded-[20px] p-4 flex flex-col gap-1">
+        <Cobweb size={44} flip />
         <span className="text-2xl">⚡</span>
         <div className="font-black text-sm">Pedido rápido</div>
         <div className="text-zinc-500 text-xs font-semibold">Por WhatsApp directo</div>
       </div>
-      <div className="bg-[#161616] border border-white/5 rounded-[20px] p-4 flex flex-col gap-1">
+      <div className="relative overflow-hidden bg-[#161616] border border-white/5 rounded-[20px] p-4 flex flex-col gap-1">
+        <Cobweb size={44} flip />
         <span className="text-2xl">🚚</span>
         <div className="font-black text-sm">Envío o retiro</div>
         <div className="text-zinc-500 text-xs font-semibold">Elegís vos</div>

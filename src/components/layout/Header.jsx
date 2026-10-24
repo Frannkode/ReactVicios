@@ -1,9 +1,13 @@
+import Cobweb from '../ui/Cobweb';
+
 const Header = ({ view, goHome, goToMenu, setView, totalItems }) => {
   const titles = { home: null, menu: 'Menú', cart: 'Tu Pedido' };
   const title = titles[view];
 
   return (
     <header className="sticky top-0 left-0 right-0 z-40 bg-[#0A0A0A]/90 backdrop-blur-xl px-5 pt-12 pb-4">
+      <Cobweb size={70} />
+      <Cobweb size={70} flip />
       <div className="flex items-center justify-between">
         {view !== 'home' ? (
           <button
