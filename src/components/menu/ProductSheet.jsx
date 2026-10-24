@@ -131,7 +131,7 @@ const ProductSheet = ({ prodId, cant, onClose, agregarAlCarrito, quitarDelCarrit
                 )}
                 <button
                   onClick={() => agregarAlCarrito(prod)}
-                  className="w-10 h-10 rounded-2xl bg-red-500 hover:bg-red-600 text-white flex items-center justify-center transition-all active:scale-90 shadow-[0_4px_20px_rgba(239,68,68,0.4)]"
+                  className="w-10 h-10 rounded-2xl bg-red-500 hover:bg-red-600 text-white flex items-center justify-center transition-all active:scale-90 shadow-[0_4px_20px_rgba(249,115,22,0.4)]"
                 >
                   <Plus size={18} strokeWidth={2.5} />
                 </button>

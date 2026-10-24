@@ -43,3 +43,29 @@ html { scroll-behavior: smooth; }
 }
 
 .app-root { min-height: 100dvh; }
+
+/* Halloween: pisa la paleta roja de Tailwind por naranja calabaza */
+@theme {
+  --color-red-300: #FDBA74;
+  --color-red-400: #FB923C;
+  --color-red-500: #F97316;
+  --color-red-600: #EA580C;
+  --color-red-700: #C2410C;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(249,115,22,0.18), transparent 45%),
+    radial-gradient(circle at 90% 100%, rgba(124,58,237,0.16), transparent 45%);
+}
+
+@keyframes float-bat {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-8px) rotate(4deg); }
+}
+.float-bat { animation: float-bat 3s ease-in-out infinite; }

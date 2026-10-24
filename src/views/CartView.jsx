@@ -14,7 +14,7 @@ const CartView = ({ carrito, delivery, setDelivery, address, setAddress, quitarD
         </div>
         <button
           onClick={goToMenu}
-          className="bg-red-500 text-white px-8 py-3 rounded-2xl font-black text-base transition-all active:scale-95 shadow-[0_4px_20px_rgba(239,68,68,0.35)]"
+          className="bg-red-500 text-white px-8 py-3 rounded-2xl font-black text-base transition-all active:scale-95 shadow-[0_4px_20px_rgba(249,115,22,0.35)]"
         >
           Ver menú
         </button>

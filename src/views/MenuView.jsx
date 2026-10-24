@@ -28,7 +28,7 @@ const MenuView = ({ carrito, activeCard, setActiveCard, agregarAlCarrito, quitar
               onClick={() => setActiveCategory(cat)}
               className={`flex-none px-4 py-2 rounded-full text-sm font-bold transition-all active:scale-95 ${
                 activeCategory === cat
-                  ? 'bg-red-500 text-white shadow-[0_4px_20px_rgba(239,68,68,0.35)]'
+                  ? 'bg-red-500 text-white shadow-[0_4px_20px_rgba(249,115,22,0.35)]'
                   : 'bg-[#161616] text-zinc-400 border border-white/5 hover:text-white'
               }`}
             >

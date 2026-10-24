@@ -16,8 +16,8 @@ const Header = ({ view, goHome, goToMenu, setView, totalItems }) => {
           </button>
         ) : (
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 bg-red-500 rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(239,68,68,0.3)]">
-              <span className="text-lg">🍔</span>
+            <div className="w-9 h-9 bg-red-500 rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(249,115,22,0.3)]">
+              <span className="text-lg">🎃</span>
             </div>
             <div>
               <div className="text-xs text-zinc-500 font-semibold leading-none">Bienvenido a</div>
