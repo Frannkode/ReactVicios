@@ -2,7 +2,7 @@ import viciosEspecialImg from '../assets/img/viciosespecial.jpg';
 import megaViciosImg from '../assets/img/megavicios.jpg';
 import decampoImg from '../assets/img/decampo.jpg';
 import viciosComunImg from '../assets/img/vicioscomun.jpg';
-import cajaArgentinaImg from '../assets/img/cajaargentina.jpeg';
+import edicionEspecialImg from '../assets/img/edicionespecial.jpeg';
 import sandwicheImg from '../assets/img/sandwiche.jpg';
 import superViciosImg from '../assets/img/supervicios.jpg';
 import papasImg from '../assets/img/papas.jpg';
@@ -75,6 +75,15 @@ export const PRODUCTOS = [
     agotado: false
   },
   {
+    id: 17,
+    categoria: "Hamburguesas",
+    nombre: "Edición Especial 💣",
+    descripcion: "Carne 120gr, cheddar, panceta, cebolla y queso roquefort, huevo, salsa de la casa",
+    precio: 8000,
+    imagen: edicionEspecialImg,
+    agotado: false
+  },
+  {
     id: 8,
     categoria: "Sandwiches",
     nombre: "Sandwiche de Milanesa",
@@ -97,7 +106,7 @@ export const PRODUCTOS = [
     categoria: "Fritas",
     nombre: "Papafritas",
     descripcion: "Papas fritas",
-    precio: 4500,
+    precio: 5500,
     imagen: papasImg,
     agotado: false
   },
@@ -106,18 +115,8 @@ export const PRODUCTOS = [
     categoria: "Fritas",
     nombre: "Papas Grandes",
     descripcion: "Papas fritas grandes, crujientes",
-    precio: 7500,
+    precio: 8000,
     imagen: papasGrandesImg,
-    agotado: false
-  },
-  {
-    id: 13,
-    categoria: "Extras",
-    nombre: "Caja de Argentina",
-    descripcion: "Caja especial de Argentina",
-    precio: 1600,
-    precioOculto: true,
-    imagen: cajaArgentinaImg,
     agotado: false
   },
   {
