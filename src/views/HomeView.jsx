@@ -1,31 +1,27 @@
-import halloweenImg from '../assets/img/hallowenn.png';
-import Cobweb from '../components/ui/Cobweb';
+import panchoImg from '../assets/img/13ca3035-9748-43c2-91ff-98f9b6b82522.jpg';
 
 const HomeView = ({ goToMenu }) => (
   <div className="flex flex-col gap-6 pb-4">
     {/* Hero card */}
-    <div className="relative rounded-[32px] overflow-hidden bg-[#161616] border border-orange-500/30 shadow-[0_0_40px_rgba(249,115,22,0.2)]" style={{ minHeight: 360 }}>
+    <div className="relative rounded-[32px] overflow-hidden bg-[#161616] border border-white/5 shadow-2xl" style={{ minHeight: 280 }}>
       <img
-        src={halloweenImg}
+        src={panchoImg}
         className="absolute inset-0 w-full h-full object-cover"
-        alt="Hamburguesas de Halloween: pan negro y pan naranja"
+        alt="Panchos"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-      <Cobweb size={130} />
-      <Cobweb size={130} flip />
-      <span className="float-bat absolute top-5 left-1/2 -translate-x-1/2 text-3xl">🦇</span>
-      <div className="relative z-10 flex flex-col justify-end h-full p-6" style={{ minHeight: 360 }}>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+      <div className="relative z-10 flex flex-col justify-end h-full p-6" style={{ minHeight: 280 }}>
         <div className="inline-flex items-center gap-2 bg-red-500/20 border border-red-500/30 text-red-400 px-3 py-1 rounded-full text-xs font-bold mb-3 self-start">
           <span className="w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse" />
-          ESPECIAL HALLOWEEN
+          NUEVO
         </div>
-        <h2 className="text-3xl font-black leading-tight mb-1">Noche de Halloween 🎃</h2>
-        <p className="text-zinc-300 text-sm font-semibold mb-4">Elegí tu pan: negro o naranja</p>
+        <h2 className="text-3xl font-black leading-tight mb-1">Panchos 🌭</h2>
+        <p className="text-zinc-300 text-sm font-semibold mb-4">Clásico, JyQ y Cheddar y panceta</p>
         <div className="flex items-center justify-between">
-          <span className="text-2xl font-black text-red-400">👻 Si te animás</span>
+          <span className="text-2xl font-black text-red-400">Desde $4.000</span>
           <button
             onClick={goToMenu}
-            className="bg-red-500 hover:bg-red-600 text-white px-5 py-2.5 rounded-2xl font-black text-sm transition-all active:scale-95 shadow-[0_4px_20px_rgba(249,115,22,0.4)]"
+            className="bg-red-500 hover:bg-red-600 text-white px-5 py-2.5 rounded-2xl font-black text-sm transition-all active:scale-95 shadow-[0_4px_20px_rgba(239,68,68,0.4)]"
           >
             Ver menú →
           </button>
@@ -35,14 +31,12 @@ const HomeView = ({ goToMenu }) => (
 
     {/* Sección info rápida */}
     <div className="grid grid-cols-2 gap-3">
-      <div className="relative overflow-hidden bg-[#161616] border border-white/5 rounded-[20px] p-4 flex flex-col gap-1">
-        <Cobweb size={44} flip />
+      <div className="bg-[#161616] border border-white/5 rounded-[20px] p-4 flex flex-col gap-1">
         <span className="text-2xl">⚡</span>
         <div className="font-black text-sm">Pedido rápido</div>
         <div className="text-zinc-500 text-xs font-semibold">Por WhatsApp directo</div>
       </div>
-      <div className="relative overflow-hidden bg-[#161616] border border-white/5 rounded-[20px] p-4 flex flex-col gap-1">
-        <Cobweb size={44} flip />
+      <div className="bg-[#161616] border border-white/5 rounded-[20px] p-4 flex flex-col gap-1">
         <span className="text-2xl">🚚</span>
         <div className="font-black text-sm">Envío o retiro</div>
         <div className="text-zinc-500 text-xs font-semibold">Elegís vos</div>
@@ -52,14 +46,14 @@ const HomeView = ({ goToMenu }) => (
     {/* CTA */}
     <button
       onClick={goToMenu}
-      className="w-full bg-red-500 hover:bg-red-600 text-white py-4 rounded-[20px] font-black text-lg transition-all active:scale-[0.98] shadow-[0_8px_30px_rgba(249,115,22,0.35)]"
+      className="w-full bg-red-500 hover:bg-red-600 text-white py-4 rounded-[20px] font-black text-lg transition-all active:scale-[0.98] shadow-[0_8px_30px_rgba(239,68,68,0.35)]"
     >
       VER MENÚ COMPLETO
     </button>
 
     {/* Footer info */}
     <div className="text-center text-zinc-600 text-xs font-semibold pb-2">
-      Las burgers más <span className="text-red-500">icónicas</span> de la ciudad 🎃
+      Las burgers más <span className="text-red-500">icónicas</span> de la ciudad 🍔
     </div>
   </div>
 );

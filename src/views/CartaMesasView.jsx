@@ -13,13 +13,13 @@ export default function CartaMesasView() {
     <div className="min-h-screen bg-[#0A0A0A] text-white font-['Nunito',_sans-serif]">
       <div className="max-w-md mx-auto px-5 py-8">
         <header className="text-center mb-8">
-          <h1 className="text-4xl font-black tracking-tighter text-orange-500">Vicio's Burger</h1>
+          <h1 className="text-4xl font-black tracking-tighter text-red-500">Vicio's Burger</h1>
           <p className="text-white/60 mt-1">Nuestra carta</p>
         </header>
 
         {secciones.map(({ cat, items }) => (
           <section key={cat} className="mb-8">
-            <h2 className="text-2xl font-extrabold text-orange-500 border-b border-white/10 pb-2 mb-4">
+            <h2 className="text-2xl font-extrabold text-red-500 border-b border-white/10 pb-2 mb-4">
               {TITULOS[cat] ?? cat}
             </h2>
             <ul className="space-y-4">
@@ -30,7 +30,7 @@ export default function CartaMesasView() {
                     <p className="font-extrabold">{p.nombre}</p>
                     <p className="text-sm text-white/60">{p.descripcion}</p>
                   </div>
-                  <span className="font-black text-orange-400 whitespace-nowrap">
+                  <span className="font-black text-red-400 whitespace-nowrap">
                     {p.precio ? fmt(p.precio) : 'Consultar'}
                   </span>
                 </li>
